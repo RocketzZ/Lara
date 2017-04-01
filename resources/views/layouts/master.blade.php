@@ -61,15 +61,7 @@
         </div>
 	</footer>
 
-    <script src="{{ asset('/js/jquery-2.1.3.min.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('/js/bootbox.min.js') }}"></script>
-    <script src="{{ asset('/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('/lang/de.js') }}"></script>
-    <script src="{{ asset('/lang/en.js') }}"></script>
-    <script src="{{ asset('/js/vedst-scripts.js') }}"></script>
-    <script src="{{ asset('/js/bin/bundle.js') }}"></script>
-    <script src="{{ asset('/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 	@yield('moreScripts')
   </body>
 </html>
