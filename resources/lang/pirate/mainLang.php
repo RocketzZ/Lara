@@ -74,6 +74,9 @@ return [
     'showMore'              => 'Mehr!',
     'showLess'              => 'Verschwinde!',
     
+    'Guestlist'             => 'Matrosenliste',
+    'Schedule'              => 'Meuterplan',
+
     'hideTimes'             => 'Gläser wegpacken',
     
     'addComment'            => 'Blödsinn ausrufen',  //not used Line ClubEventView ~270 Placeholder message and similar

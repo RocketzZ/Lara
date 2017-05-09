@@ -76,7 +76,7 @@ return [
     
     'hideTimes'             => 'Hide times',
     
-    'Guestlist'             => 'Guestlist',
+    'Guestlist'             => 'Guest List',
     'Schedule'              => 'Schedule',
 
     'addComment'            => 'add comment here',  //not used Line ClubEventView ~270 Placeholder message and similar
