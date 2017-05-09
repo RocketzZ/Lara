@@ -172,6 +172,25 @@
 
 	<br>
 
+	{{-- Tabs for Changing Guestlist/Schedule View --}}
+
+	<ul class="nav nav-tabs">
+  		<li class="active"><a href="#schedule" data-toggle="tab" aria-expanded="True">{{ trans('mainLang.Schedule') }}</a></li>
+  		<li class=""><a href="#guestlist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Guestlist') }}</a></li>
+	</ul>
+
+	<div id="myTabContent" class="tab-content">
+  		<div class="tab-pane fade active in" id="schedule">
+   		 	<p>Curent Schedule View to be put here.</p>
+  		</div>
+  		<div class="tab-pane fade" id="guestlist">
+    		<p>Guestlist View to be integrated here.</p>
+  		</div>
+	</div>
+
+
+	
+
     <div class="panelEventView">
         {{-- show time button Ger.: Zeiten einblenden --}}
 		&nbsp;&nbsp;
@@ -179,6 +198,7 @@
 	
 		{{-- hide taken shifts button Ger.: Vergebenen Diensten ausblenden --}}
 		<button class="btn btn-xs hidden-print" type="button" id="toggle-taken-shifts">{{ trans('mainLang.hideTakenShifts') }}</button>
+		
 	</div>	
 
 
