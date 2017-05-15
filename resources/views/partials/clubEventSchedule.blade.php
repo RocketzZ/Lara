@@ -183,7 +183,4 @@
 				</tbody>
 			</table>
 		</div>
-		<br>
-		<br class="visible-xs">
-                    </div>
 	@endif
