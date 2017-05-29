@@ -20,5 +20,29 @@ class GuestListAttendanceList extends Model
      *
      * @var array
      */
-     protected fillable
+     protected $fillable = array('personidclub',
+                                 'personid',
+                                 'name',
+                                 'surname',
+                                 'status',
+                                 'comment',
+                                 'importsource',    //0->added manually
+                                                    //1->added by clubleitung
+                                                    //2->added by member
+                                                    //3->added by admin
+                                                    //->...
+                                                    //4->added via facebook import
+                                 'attendancestatus',
+                                 'eventid');
+
+//name functions correctly and get data
+public function getUserID() {
+		return $this->belongsTo('Lara\users', 'personid', 'id');
+	}
+
+public function getEventID() {
+        return $this->belongsTo('Lara\club_events', 'eventid', 'id');
+    }
+
+
 }
