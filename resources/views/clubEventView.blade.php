@@ -127,7 +127,7 @@
 							   class="btn btn-info"
 							   data-toggle="tooltip"
 		                       data-placement="bottom"
-		                       title="{{ trans('mainLang.seeAttendannceList') }}">
+		                       title="{{ trans('mainLang.seeAttendanceList') }}">
 							   <i class="fa fa-bars"></i>
 							</a>
 							&nbsp;&nbsp;

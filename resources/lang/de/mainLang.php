@@ -65,7 +65,7 @@ return [
     'willShowFor'           => 'wird angezeigt für',
     
     'changeEvent'           => 'Veranstaltung ändern',
-    'seeAttendannceList'    => 'Anwesenheitsliste ansehen',
+    'seeAttendanceList'    =>  'Anwesenheitsliste anzeigen',
     'deleteEvent'           => 'Veranstaltung löschen',
     'confirmDeleteEvent'    => 'Diese Veranstaltung wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden!',
     
