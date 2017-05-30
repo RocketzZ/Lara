@@ -46,6 +46,9 @@ class ClubEvent extends Model
 								'evnt_public_info',
 								'evnt_private_details',
 								'evnt_is_private',
+								'guestlistattendancelist',	//true 	->guest list wanted
+															//false ->attendance list wanted
+															//NULL 	->neither wanted 
 								'evnt_is_published');
 
 	/**

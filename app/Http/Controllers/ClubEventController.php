@@ -106,28 +106,31 @@ class ClubEventController extends Controller
             $info       = $template->getClubEvent->evnt_public_info;
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
+            $guestlistattendancelist = $template->getClubEvent->guestlistattendancelist;
         } else {
             // fill variables with no data if no template was chosen
             $activeTemplate = "";
-            $entries    = null;
-            $title      = null;
-            $type       = null;
-            $subtitle   = null;
-            $place      = null;
-            $filter     = null;
-            $dv         = null;
-            $timeStart  = null;
-            $timeEnd    = null;
-            $info       = null;
-            $details    = null;
-            $private    = null;
+            $entries                    = null;
+            $title                      = null;
+            $type                       = null;
+            $subtitle                   = null;
+            $place                      = null;
+            $filter                     = null;
+            $dv                         = null;
+            $timeStart                  = null;
+            $timeEnd                    = null;
+            $info                       = null;
+            $details                    = null;
+            $private                    = null;
+            $guestlistattendancelist    = null;
         }
-
-        return View::make('createClubEventView', compact('places', 'jobtypes', 'templates',
+                
+        return View::make('createClubEventView', compact('places', 'jobtypes', 'templates', 
                                                          'entries', 'title', 'subtitle', 'type',
                                                          'place', 'filter', 'timeStart', 'timeEnd',
-                                                         'info', 'details', 'private', 'dv',
-                                                         'activeTemplate',
+                                                         'info', 'details', 'private',
+                                                         'guestlistattendancelist','dv',
+                                                         'activeTemplate', 
                                                          'date'));
     }
 
