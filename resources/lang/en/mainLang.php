@@ -64,6 +64,7 @@ return [
     'willShowFor'           => 'will be shown for',
     
     'changeEvent'           => 'Change Event',
+    'seeAttendannceList'    => 'See Attendannce List',
     'deleteEvent'           => 'Delete Event',
     'confirmDeleteEvent'    => 'Are you sure you want to delete this event? This action can not be undone!',
     
