@@ -14,7 +14,7 @@ AND (Session::get('userGroup') == 'marketing'
 	
 	{!! Form::open(['method' => 'PUT', 'route' => ['event.update', $event->id]]) !!}
 
-	<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
 		<div class="panel col-md-6 col-sm-12 col-xs-12">
 
 			<div class="panel-heading">
@@ -103,7 +103,12 @@ AND (Session::get('userGroup') == 'marketing'
 								{{ trans('mainLang.showExtern') }}
 							</div>
 				            <br>
-							
+                            <div>
+                                <div class="hidden">
+                                    {!! Form::checkbox('evntIsPublished', '1', $event->evnt_is_published == 1) !!}
+                                </div>
+                                <button type="button" class="btn" id="publishBtn"> <i id="eventPublishedIndicator" class="fa @if($event->evnt_is_published == 1) fa-check-square-o @else fa-square-o @endif" aria-hidden="true"></i> {{ trans('mainLang.publishEvent') }}</button>
+                            </div>
 						</div>
 				    </div>
 				@else
@@ -184,7 +189,6 @@ AND (Session::get('userGroup') == 'marketing'
 									</span>
 				            	@endif
 				            </div>
-							
 						</div>
 				    </div>					
 				@endif
@@ -311,12 +315,11 @@ AND (Session::get('userGroup') == 'marketing'
 	<br>
 	@include('partials.editSchedule')
 	<br>
-	
+
 	{!! Form::submit('Änderungen speichern', array('class'=>'btn btn-success', 'id'=>'button-edit-submit')) !!}
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<br class="visible-xs"><br class="visible-xs">
 	<a href="javascript:history.back()" class="btn btn-default">{{ trans('mainLang.backWithoutChange') }} </a>
-	
 	{!! Form::close() !!}
 
 @else
@@ -336,6 +339,7 @@ AND (Session::get('userGroup') == 'marketing'
 @endif
 
 @stop
+
 
 
 
