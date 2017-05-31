@@ -161,6 +161,14 @@
 							   <i class="fa fa-pencil"></i>
 							</a>
 							&nbsp;&nbsp;
+							<a href="#"
+							   class="btn btn-info"
+							   data-toggle="tooltip"
+		                       data-placement="bottom"
+		                       title="{{ trans('mainLang.seeAttendanceList') }}">
+							   <i class="fa fa-bars"></i>
+							</a>
+							&nbsp;&nbsp;
 							<a href="{{ $clubEvent->id }}"
 							   class="btn btn-default"
 							   data-toggle="tooltip"
