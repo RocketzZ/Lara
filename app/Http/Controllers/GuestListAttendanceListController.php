@@ -122,9 +122,28 @@ class GuestListAttendanceListController extends Controller
      */
     public function show($id)
     {
-        /*
+       $entry = GuestListAttendanceList::where('id', '=', $id)
+                              ->firstOrFail();
 
-        */
+      
+
+        // Person NULL means "=FREI=" - check for it every time you query a relationship
+        $ldapId = !is_null($entry->getPerson) ? $entry->getPerson->prsn_ldap_id : "";
+        $response = [
+            'id'                => $entry->id,
+            'name'              => !is_null($entry->getPerson) ? $entry->getPerson->name          : "=FREI=",
+            'prsn_ldap_id'      => $ldapId,
+            'prsn_status'       => !is_null($entry->getPerson) ? $entry->getPerson->prsn_status        : "",
+            'comment'           => $entry->entry_user_comment,
+            'is_current_user'   => $ldapId == Session::get('userId')
+        ];
+
+        if (Request::ajax()) {
+            return response()->json($response);
+        } else {     
+            return response()->json($response);
+            //return View::make('items.index');
+        }
     }
 
     /**

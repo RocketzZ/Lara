@@ -21,6 +21,7 @@ use Log;
 use Redirect;
 use Session;
 use View;
+use Lara\GuestListAttendanceList;
 
 class ClubEventController extends Controller
 {
