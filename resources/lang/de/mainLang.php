@@ -77,6 +77,7 @@ return [
     'showLess'              => 'weniger anzeigen',
     
     'Guestlist'             => 'Gästeliste',
+    'Attendancelist'        => 'Anwesenheitsliste',
     'Schedule'              => 'Dienstplan',
 
     'hideTimes'             => 'Zeiten ausblenden',
@@ -254,7 +255,7 @@ return [
     'serviceTypeEnter'      => 'Diensttyp hier eingeben',
     'weight'                => 'Gewicht (für Statistik)',
     'statisticalEvaluation' => 'Statistik',
-    
+    'editAttendanceList'    => 'Anwesenheitsliste erstellen',
     //-----------------------------------------------------------------------------------------------------------
     
     // /resources/views/partials/filter.blade.php
@@ -343,7 +344,14 @@ return [
     'addQuestion'               => 'Frage hinzufügen',
     
     //-----------------------------------------------------------------------------------------------------------
+     // /resources/views/partials/clubEventAttendanceList.blade.php
+    'sort'                       => 'Sortieren', 
+    'sortByName'                 => 'nach dem Namen', 
+    'sortByClub'                 => 'nach Verein', 
+    'sortByAttendancestatus'     => 'nach dem Anwesenheitsstatus', 
     
+ //-----------------------------------------------------------------------------------------------------------
+
     // /resources/views/partials/weekCellFull.blade.php
     'hide' => 'Ausblenden',
     
