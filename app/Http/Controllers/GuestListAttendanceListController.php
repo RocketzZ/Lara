@@ -122,12 +122,11 @@ class GuestListAttendanceListController extends Controller
      */
     public function show($id)
     {
-       $entry = GuestListAttendanceList::where('id', '=', $id)
+       /*$entry = GuestListAttendanceList::where('id', '=', $id)
                               ->firstOrFail();
 
       
 
-        // Person NULL means "=FREI=" - check for it every time you query a relationship
         $ldapId = !is_null($entry->getPerson) ? $entry->getPerson->prsn_ldap_id : "";
         $response = [
             'id'                => $entry->id,
@@ -144,6 +143,7 @@ class GuestListAttendanceListController extends Controller
             return response()->json($response);
             //return View::make('items.index');
         }
+        */
     }
 
     /**
@@ -169,9 +169,22 @@ class GuestListAttendanceListController extends Controller
     public function update(Request $request, $id)
     {
         //here could be the ajax server stuff, but not sure ask patche if possible
-        /*
+        
 
-        */
+        $List = $this->editList($id);
+
+        // log the action
+        Log::info('List edited: ' . Session::get('userName') . ' (' . Session::get('userId') . ', '
+                 . Session::get('userGroup') . ') edited list "' . $list->id . '" (name: ' . $list->name . ') ' + ' 
+                    (surname: ' . $list->surname . ') on ' . $list->id . '.');
+
+
+        // save all data in the database
+        $list->save();
+        $schedule->save();
+        foreach($entries as $entry)
+            $entry->save();
+        Utilities::clearIcalCache();
     }
 
     /**
@@ -184,4 +197,41 @@ class GuestListAttendanceListController extends Controller
     {
         //to destroy an entry
     }
-}
+
+
+
+
+
+//--------- PRIVATE FUNCTIONS ------------
+
+
+ /**
+    * Edit or create a guest list or attendance list with its entered information.
+    * If $id is null create a new guestlistattendancelist, otherwise the clubEvent specified by $id will be edit.
+    *
+    * @param int $id
+    * @return GuestListAttendanceList
+    */
+    private function editList($id)
+    {
+        $list = new GuestListAttendanceList;
+        if(!is_null($id)) {
+            $list = GuestListAttendanceList::findOrFail($id);
+        }
+
+        // format: strings; no validation needed
+        $list->name        = Input::get('name');
+        $list->surname     = Input::get('surname');
+        $list->comment     = Input::get('comment');
+        //all the rest of the data is automated
+
+        // format: tinyInt; validate on filled value
+        // reversed this: input=1 means "event is public", input=0 means "event is private"
+        //$list->evnt_is_private = (Input::get('isPrivate') == '1') ? 0 : 1;
+        //$listIsPublished = Input::get('evntIsPublished');
+        
+
+        return $list;
+        
+     }
+ }
