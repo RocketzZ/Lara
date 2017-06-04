@@ -27,8 +27,6 @@ class CreateClubEventsTable extends Migration
             $table->longText('evnt_private_details');       
                     // Can be empty, but not NULL
             $table->boolean('evnt_is_private');
-            $table->boolean('guestlistattendancelist');
-                    //can be NULL
             $table->timestamps();
         });
     }
