@@ -20,8 +20,8 @@ class AddOptionForLists extends Migration
             //true 	->guest list wanted
 			//false ->attendance list wanted
 			//NULL 	->neither wanted
+        }
     }
-
     /**
      * Reverse the migrations.
      *
@@ -33,4 +33,4 @@ class AddOptionForLists extends Migration
              $table->dropColumn('guestlistattendancelist');
         }); 
     }
-}
+
