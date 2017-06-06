@@ -171,6 +171,8 @@ return [
     'myClub'                => 'Club',
 
     'addMe'                 => 'Add Me!',
+    'surname'               => 'Surname',
+    'firstname'             => 'Firstname',
 
     //Answers
     'yes'                   => 'Yes',

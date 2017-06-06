@@ -172,6 +172,8 @@ return [
     'myClub'                => 'Club',
 
     'addMe'                 => 'Mich eintragen!',
+    'surname'               => 'Nachname',
+    'firstname'             => 'Vorname',
     
     //Answers
     'yes'                   => 'Ja',
