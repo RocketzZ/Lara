@@ -33,4 +33,4 @@ class AddOptionForLists extends Migration
              $table->dropColumn('guestlistattendancelist');
         }); 
     }
-
+}
