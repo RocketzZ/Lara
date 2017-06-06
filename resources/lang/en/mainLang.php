@@ -78,6 +78,7 @@ return [
     'hideTimes'             => 'Hide times',
     
     'Guestlist'             => 'Guest List',
+    'Attendancelist'        => 'Attendance List',
     'Schedule'              => 'Schedule',
 
     'addComment'            => 'add comment here',  //not used Line ClubEventView ~270 Placeholder message and similar
@@ -252,6 +253,7 @@ return [
     'serviceTypeEnter'      => 'Enter shift type here',
     'weight'                => 'Statistical weight',
     'statisticalEvaluation' => 'Statistics',
+    'editAttendanceList'    => 'Edit attendancelist',
 
     //-----------------------------------------------------------------------------------------------------------
 
@@ -343,7 +345,14 @@ return [
     'addAnswerOption'       => 'Add an answer option',
     'addQuestion'           => 'Add a question',
 
-    //-----------------------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------------------------
+     // /resources/views/partials/clubEventAttendanceList.blade.php
+    'sort'                       => 'Sort', 
+    'sortByName'                 => 'By name', 
+    'sortByClub'                 => 'By club', 
+    'sortByAttendancestatus'     => 'By attendancestatus', 
+    
+ //------------------------------------------------------------------------------------------------------------
 
     // /resources/views/partials/weekCellFull.blade.php
     'hide'                  => 'Hide',

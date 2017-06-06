@@ -76,6 +76,7 @@ return [
     'showLess'              => 'Verschwinde!',
     
     'Guestlist'             => 'Matrosenliste',
+    'Attendancelist'        => 'Gefangenenliste',
     'Schedule'              => 'Meuterplan',
 
     'hideTimes'             => 'Gläser wegpacken',
@@ -253,6 +254,7 @@ return [
     'serviceTypeEnter'      => 'Diensttyp hier eingeben',
     'weight'                => 'Gewicht (für Statistik)',
     'statisticalEvaluation' => 'Kombüse',
+    'editAttendanceList'    => 'Gefangenenliste erstellen',
     
     //-----------------------------------------------------------------------------------------------------------
     
@@ -341,7 +343,14 @@ return [
     'addAnswerOption'           => 'Antwortmöglichkeit hinzufügen',
     'addQuestion'               => 'Frage hinzufügen',
     
-    //-----------------------------------------------------------------------------------------------------------
+       //-----------------------------------------------------------------------------------------------------------
+     // /resources/views/partials/clubEventAttendanceList.blade.php
+    'sort'                       => 'Sortieren', 
+    'sortByName'                 => 'nach dem Namen', 
+    'sortByClub'                 => 'nach Schiff', 
+    'sortByAttendancestatus'     => 'nach dem Gefangenheitsstatus', 
+    
+ //-----------------------------------------------------------------------------------------------------------
     
     // /resources/views/partials/weekCellFull.blade.php
     'hide' => 'Ausblenden',

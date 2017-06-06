@@ -223,6 +223,7 @@
 		<ul class="nav nav-tabs">
   			<li class="active"><a href="#schedule" data-toggle="tab" aria-expanded="true">{{ trans('mainLang.Schedule') }}</a></li>
   			<li class=""><a href="#guestlist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Guestlist') }}</a></li>
+			<li class=""><a href="#attendancelist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Attendancelist') }}</a></li>
 		</ul>
 
 		<div class="tab-content">
@@ -232,6 +233,10 @@
 
   			<div class="tab-pane" id="guestlist">
     			@include("partials.clubEventGuestlist")
+  			</div>
+
+			  <div class="tab-pane " id="attendancelist">
+    			@include("partials.clubEventAttendancelist")
   			</div>
 		</div>
 	</div>
