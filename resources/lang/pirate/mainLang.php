@@ -171,6 +171,8 @@ return [
     'myClub'                => 'Schiff',
 
     'addMe'                 => 'Anhoyern!',
+    'surname'               => 'Stammnamen',
+    'firstname'             => 'Ich-Namen',
     
     //Answers
     'yes'                   => 'Ja',
