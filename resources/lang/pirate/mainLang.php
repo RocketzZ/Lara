@@ -67,7 +67,7 @@ return [
     'seeAttendanceList'    =>  'Gefangenenliste ansehen',
     'deleteEvent'           => 'Veranstaltung löschen',
     'confirmDeleteEvent'    => 'Diese Veranstaltung wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden!',
-    
+    'createGuestAttendanceList'=>'Gäste/Anwesenheitsliste erstellen',
     'additionalInfo'        => 'Flaschenpost',
     'moreDetails'           => 'Ansagen vom Kapitän',
     

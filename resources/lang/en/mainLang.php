@@ -67,7 +67,7 @@ return [
     'seeAttendanceList'    =>  'Show Attendannce List',
     'deleteEvent'           => 'Delete Event',
     'confirmDeleteEvent'    => 'Are you sure you want to delete this event? This action can not be undone!',
-
+    'createGuestAttendanceList'=>'create Guest/Attendancelist',
     'additionalInfo'        => 'Additional details',
     'moreDetails'           => 'Internal information',
 

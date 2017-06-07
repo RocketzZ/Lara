@@ -161,11 +161,11 @@
 							   <i class="fa fa-pencil"></i>
 							</a>
 							&nbsp;&nbsp;
-							<a href="#"
+							<a href="{{ URL::route('guestentry.create', $clubEvent->id) }}"
 							   class="btn btn-info"
 							   data-toggle="tooltip"
 		                       data-placement="bottom"
-		                       title="{{ trans('mainLang.seeAttendanceList') }}">
+		                       title="{{ trans('mainLang.createGuestAttendanceList') }}">
 							   <i class="fa fa-bars"></i>
 							</a>
 							&nbsp;&nbsp;

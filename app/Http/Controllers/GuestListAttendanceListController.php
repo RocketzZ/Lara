@@ -96,9 +96,11 @@ class GuestListAttendanceListController extends Controller
         }
                 
         //return values for creating new table entry
-        return View::make('createGuestAttendanceList', compact('personidclub','personid','name','surname',
-                                                               'status','comment','importsource',
-                                                               'attendancestatus','eventid'));
+        return redirect()->back()->withInput();
+        
+               //View::make('createGuestAttendanceList', compact('personidclub','personid','name','surname',
+               //                                                'status','comment','importsource',
+               //                                                'attendancestatus','eventid'));
     }
 
     /**
@@ -109,9 +111,7 @@ class GuestListAttendanceListController extends Controller
      */
     public function store(Request $request)
     {
-        /*
-
-        */
+       GuestAttendanceList::create($request->all());
     }
 
     /**

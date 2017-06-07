@@ -12,12 +12,7 @@ Guestlist to be integrated here.
 				<div id="container" class="container">
  {{-- If there are entries passed - fill them with data and increment counter --}} 
 
-		   		@if(isset($entries))
-		        @foreach($entries as $entry)
-				{!! Form::open(  array( 'route' => ['guestentry.update', $entry->id],
-			                            'id' => $entry->id, 
-			                            'method' => 'PUT', 
-			                            'class' => 'scheduleEntry')  ) !!}
+		   		
 
 		            <div id={{ "box" . ++$counter }} class="box">
 			           	
@@ -69,8 +64,6 @@ Guestlist to be integrated here.
 					
 				
 			
-		       	 @endforeach 
-		  	  @endif
 
 
 		    {{-- and add one empty entry --}}
@@ -127,7 +120,7 @@ Guestlist to be integrated here.
 	    	<br>
 			<input type="hidden" name="counter" id="counter" value="{{$counter}}" />
 
-		 {!! Form::close() !!}
+		
 
 		</div>
 
@@ -137,10 +130,7 @@ Guestlist to be integrated here.
 				
 			</div>
 			{{-- Show a line after each row except the last one --}}
-			@if($entry !== $entries->last() )
-				<hr class="col-md-12 col-md-12 col-xs-12 top-padding no-margin no-padding">
-			@endif
-		
+			
 	
 	</div>
 </div>
