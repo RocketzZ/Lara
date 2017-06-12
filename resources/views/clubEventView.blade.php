@@ -160,14 +160,7 @@
 		                       title="{{ trans('mainLang.changeEvent') }}">
 							   <i class="fa fa-pencil"></i>
 							</a>
-							&nbsp;&nbsp;
-							<a href="{{ URL::route('guestentry.create', $clubEvent->id) }}"
-							   class="btn btn-info"
-							   data-toggle="tooltip"
-		                       data-placement="bottom"
-		                       title="{{ trans('mainLang.createGuestAttendanceList') }}">
-							   <i class="fa fa-bars"></i>
-							</a>
+
 							&nbsp;&nbsp;
 							<a href="{{ $clubEvent->id }}"
 							   class="btn btn-default"

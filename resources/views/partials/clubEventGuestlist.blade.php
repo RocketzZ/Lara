@@ -1,5 +1,5 @@
 Guestlist to be integrated here.
-
+@if($guestlistattendancelist->eventid != '')
 
 <div class="panel panel-warning">
 
@@ -12,11 +12,13 @@ Guestlist to be integrated here.
 				<div id="container" class="container">
  {{-- If there are entries passed - fill them with data and increment counter --}} 
 
-		   		
+		   		{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $counter]]) !!}
 
 		            <div id={{ "box" . ++$counter }} class="box">
-			           	
-				        <input type="text" 
+
+					
+
+						<input type="text" 
 				       		   name={{ "name" . $counter }}
 				       		   class="input" 
 			           		   id={{ "name" . $counter }}
@@ -59,7 +61,9 @@ Guestlist to be integrated here.
 		            	
 		            	<input type="button" value="+" class="btn btn-small btn-success btnAdd" />
 		            	&nbsp;&nbsp;
-	    				<input type="button" value="&#8211;" class="btn btn-small btn-danger btnRemove" />
+	    				@if(Session::has('userId'))
+						<input type="button" value="&#8211;" class="btn btn-small btn-danger btnRemove" />
+						@endif
 					</div>
 					
 				
@@ -112,25 +116,21 @@ Guestlist to be integrated here.
 
 	        	<input type="button" value="+" class="btn btn-small btn-success btnAdd" /> 
 	        	&nbsp;&nbsp;
+				@if(Session::has('userId'))
 				<input type="button" value="&#8211;" class="btn btn-small btn-danger btnRemove" />
-
-
+				@endif
 				
+			
 	    	</div>
 	    	<br>
 			<input type="hidden" name="counter" id="counter" value="{{$counter}}" />
-
-		
-
-		</div>
-
-
-
-						
-				
-			</div>
-			{{-- Show a line after each row except the last one --}}
+			{!! Form::submit('Eintrag speichern', array('class'=>'hidden', 'id'=>'button-create-submit')) !!}
+			<button class="btn btn-primary" id="saveGuestentry"></button>
 			
-	
+			{!! Form::close() !!}	
+			
+			</div>		
+		</div>
 	</div>
 </div>
+@endif
