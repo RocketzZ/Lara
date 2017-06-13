@@ -71,6 +71,7 @@ class GuestListAttendanceListController extends Controller
             $activeTemplate = $template->guest_attendance_list;
             
             //get template
+            $guestlistattendancelist               = $template->getGuestListAttendanceList()->get();
             $personidclub       = $template->getGuestListAttendanceList->personidclub;
             $personid           = $template->getGuestListAttendanceList->personid;
             $name               = $template->getGuestListAttendanceList->name;
@@ -79,11 +80,13 @@ class GuestListAttendanceListController extends Controller
             $comment            = $template->getGuestListAttendanceList->comment;
             $importsource       = $template->getGuestListAttendanceList->importsource;    //?
             $attendancestatus   = $template->getGuestListAttendanceList->attendancestatus;
-            $eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
+            $evnt_id            = $template->getGuestListAttendanceList->evnt_id;
+            //$eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
 
         } else {
             // fill variables with no data if no template was chosen, but not sure if needed here
             $activeTemplate = "";
+            $guestlistattendancelist               = null;
             $personidclub       = null;
             $personid           = null;
             $name               = null;
@@ -92,11 +95,12 @@ class GuestListAttendanceListController extends Controller
             $comment            = null;
             $importsource       = null;
             $attendancestatus   = null;
-            $eventid            = null;      //maybe get eventid from event page
+            $evnt_id            = null;
+            //$eventid            = null;      //maybe get eventid from event page
         }
                 
         //return values for creating new table entry
-        return redirect()->back()->withInput();
+        return redirect()->back()->withErrors(compact('guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus'));
         
                //View::make('createGuestAttendanceList', compact('personidclub','personid','name','surname',
                //                                                'status','comment','importsource',
@@ -111,7 +115,7 @@ class GuestListAttendanceListController extends Controller
      */
     public function store(Request $request)
     {
-       GuestAttendanceList::create($request->all());
+       GuestListAttendanceList::create($request->all());
     }
 
     /**
@@ -166,25 +170,28 @@ class GuestListAttendanceListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($evnt_id)
     {
-        //here could be the ajax server stuff, but not sure ask patche if possible
-        
+        //here could be the ajax server stuff, but not sure ask patche if possible        
+        $guestlistattendancelist = new GuestListAttendanceList;
 
-        $List = $this->editList($id);
-
+        if (!is_null($evnt_id))
+            {
+                $guestlistattendancelist = GuestListAttendanceList::findOrFail($evnt_id);
+            }
         // log the action
-        Log::info('List edited: ' . Session::get('userName') . ' (' . Session::get('userId') . ', '
-                 . Session::get('userGroup') . ') edited list "' . $list->id . '" (name: ' . $list->name . ') ' + ' 
-                    (surname: ' . $list->surname . ') on ' . $list->id . '.');
+        //Log::info('List edited: ' . Session::get('userName') . ' (' . Session::get('userId') . ', '
+          //       . Session::get('userGroup') . ') edited list "' . $guestlistattendancelist->id . '" (name: ' . $guestlistattendancelist->name . ') ' + ' 
+            //        (surname: ' . $guestlistattendancelist->surname . ') on ' . $guestlistattendancelist->id . '.');
 
 
         // save all data in the database
-        $list->save();
+        $guestlistattendancelist->save();
         $schedule->save();
-        foreach($entries as $entry)
+        foreach($guestentries as $entry)
             $entry->save();
         Utilities::clearIcalCache();
+        return $guestlistattendancelist;
     }
 
     /**
@@ -214,24 +221,22 @@ class GuestListAttendanceListController extends Controller
     */
     private function editList($id)
     {
-        $list = new GuestListAttendanceList;
+         $guestlistattendancelist = new GuestListAttendanceList;
         if(!is_null($id)) {
-            $list = GuestListAttendanceList::findOrFail($id);
+            $guestlistattendancelist = GuestListAttendanceList::findOrFail($id);
         }
 
         // format: strings; no validation needed
-        $list->name        = Input::get('name');
-        $list->surname     = Input::get('surname');
-        $list->comment     = Input::get('comment');
+        $guestlistattendancelist->name        = Input::get('name');
+        $guestlistattendancelist->surname     = Input::get('surname');
+        $guestlistattendancelist->comment     = Input::get('comment');
         //all the rest of the data is automated
 
         // format: tinyInt; validate on filled value
         // reversed this: input=1 means "event is public", input=0 means "event is private"
-        //$list->evnt_is_private = (Input::get('isPrivate') == '1') ? 0 : 1;
-        //$listIsPublished = Input::get('evntIsPublished');
+        //$guestlistattendancelist->evnt_is_private = (Input::get('isPrivate') == '1') ? 0 : 1;
+        //$guestlistattendancelistIsPublished = Input::get('evntIsPublished');
         
-
-        return $list;
-        
+        return redirect()->back()->withInput();
      }
  }

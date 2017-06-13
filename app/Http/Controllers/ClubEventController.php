@@ -107,7 +107,7 @@ class ClubEventController extends Controller
             $info       = $template->getClubEvent->evnt_public_info;
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
-            $guestlistattendancelist = $template->getClubEvent->guestlistattendancelist;
+            $guestlistattendancelist = $template->getGuestListAttendanceList->get();
         } else {
             // fill variables with no data if no template was chosen
             $activeTemplate = "";
@@ -155,6 +155,10 @@ class ClubEventController extends Controller
         $newEvent = $this->editClubEvent(null);
         $newEvent->save();
 
+        $newGuestListAttendanceList = (new GuestListAttendanceListController)->update(null);
+        $newGuestListAttendanceList->evnt_id = $newEvent->id;
+        $newGuestListAttendanceList->save();
+
         $newSchedule = (new ScheduleController)->update(null);
         $newSchedule->evnt_id = $newEvent->id;
 
@@ -197,6 +201,7 @@ class ClubEventController extends Controller
         Log::info('Event created: ' . Session::get('userName') . ' (' . Session::get('userId') . ', '
                  . Session::get('userGroup') . ') created event "' . $newEvent->evnt_title . '" (eventID: ' . $newEvent->id . ') on ' . $newEvent->evnt_date_start . '.');
         Utilities::clearIcalCache();
+        
         // show new event
         return Redirect::action('ClubEventController@show', array('id' => $newEvent->id));
     }
@@ -232,6 +237,7 @@ class ClubEventController extends Controller
         $clubEvent->evnt_private_details = Utilities::surroundLinksWithTags($clubEvent->evnt_private_details);
 
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
+        $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->id);
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)
                                 ->with('getJobType',
@@ -276,7 +282,7 @@ class ClubEventController extends Controller
 
 
 
-        return View::make('clubEventView', compact('clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name'));
+        return View::make('clubEventView', compact('clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'guestlistattendancelist'));
     }
 
 
