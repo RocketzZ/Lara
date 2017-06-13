@@ -39,7 +39,8 @@ class GuestAttendanceEntryController extends Controller
      */
     public function index()
     {
-        //
+        // Not needed because single guestattendancelist have no meaning without a event context
+        // Restricted via routes exception.
     }
 
     /**
@@ -49,7 +50,8 @@ class GuestAttendanceEntryController extends Controller
      */
     public function create()
     {
-        //
+        // Not needed because guestattendancelist are created only as part of a event pair. 
+        // Restricted via routes exception.
     }
 
     /**
@@ -60,7 +62,8 @@ class GuestAttendanceEntryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Called as part of  CREATE
+        // IMPLEMENT LATER
     }
 
     /**
@@ -69,9 +72,9 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function show(GuestListAttendanceList $guestListAttendanceList)
+    public function show(GuestListAttendanceList $id)
     {
-        //
+        $guestListAttendanceList = GuestListAttendanceList::where()
     }
 
     /**
@@ -80,9 +83,10 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function edit(GuestListAttendanceList $guestListAttendanceList)
+    public function edit(GuestListAttendanceList $id)
     {
-        //
+        // Called as part of guestattendancelist CREATE
+        // IMPLEMENT LATER
     }
 
     /**
@@ -92,7 +96,7 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GuestListAttendanceList $guestListAttendanceList)
+    public function update(Request $request, GuestListAttendanceList $id)
     {
         //
     }
@@ -103,8 +107,43 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GuestListAttendanceList $guestListAttendanceList)
+    public function destroy(GuestListAttendanceList $id)
     {
         //
     }
+
+
+
+    //--------- PRIVATE FUNCTIONS ------------
+
+
+    /**
+    *
+    *
+    */
+    private function onDelete($id)
+    {
+
+    }
+
+
+    /**
+    *
+    *
+    */
+    private function onAdd($id)
+    {
+        
+    }
+
+
+    /**
+    *
+    *
+    */
+    private function updateStatus($id)
+    {
+        
+    }
+
 }
