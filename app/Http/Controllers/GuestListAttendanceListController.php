@@ -187,9 +187,9 @@ class GuestListAttendanceListController extends Controller
 
         // save all data in the database
         $guestlistattendancelist->save();
-        $schedule->save();
-        foreach($guestentries as $entry)
-            $entry->save();
+        
+       // foreach($guestentries as $entry)
+       //     $entry->save();
         Utilities::clearIcalCache();
         return $guestlistattendancelist;
     }

@@ -19,7 +19,8 @@ class CreateGuestAttendanceList extends Migration
             $table->string('name')->nullable()->default(NULL);                                                     //name in table
             $table->string('surname')->nullable()->default(NULL);                                                  //surname in table
             $table->tinyInteger('status')->nullable()->default(NULL);                                              //status of person e.g. Member/Candidate...
-            $table->timestamp('timestamp');                                                                        //creation timestamp of table entry
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');                                                                        //creation timestamp of table entry
             $table->string('comment', 250)->nullable()->default(NULL);                                             //comment field
             $table->tinyInteger('importsource')->nullable()->default(NULL);                                        //manually added or facebook...
             $table->tinyInteger('attendancestatus')->nullable()->default(NULL);                                    //is attening/not attending/apologized... 
