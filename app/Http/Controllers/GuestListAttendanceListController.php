@@ -86,16 +86,16 @@ class GuestListAttendanceListController extends Controller
         } else {
             // fill variables with no data if no template was chosen, but not sure if needed here
             $activeTemplate = "";
-            $guestlistattendancelist               = null;
-            $personidclub       = null;
-            $personid           = null;
-            $name               = null;
-            $surname            = null;
-            $status             = null;
-            $comment            = null;
-            $importsource       = null;
-            $attendancestatus   = null;
-            $evnt_id            = null;
+            $guestlistattendancelist    = null;
+            $personidclub               = null;
+            $personid                   = null;
+            $name                       = null;
+            $surname                    = null;
+            $status                     = null;
+            $comment                    = null;
+            $importsource               = null;
+            $attendancestatus           = null;
+            $evnt_id                    = null;
             //$eventid            = null;      //maybe get eventid from event page
         }
                 

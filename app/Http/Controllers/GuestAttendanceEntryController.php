@@ -19,6 +19,8 @@ use Config;
 use Log;
 use Redirect;
 
+use Hash;
+
 use Carbon\Carbon;
 
 use Lara\ClubEvent;
@@ -62,19 +64,39 @@ class GuestAttendanceEntryController extends Controller
      */
     public function store(Request $request)
     {
-        // Called as part of  CREATE
+        // Called as part of GuestListAttendanceList CREATE
         // IMPLEMENT LATER
     }
 
     /**
      * Display the specified resource.
+     *Returns JSON-formatted contents of a GuestListAttendanceList enty
      *
-     * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
+     *
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(GuestListAttendanceList $id)
+    public function show($id)
     {
-        $guestListAttendanceList = GuestListAttendanceList::where()
+        //
+        $guestListAttendanceList = GuestListAttendanceList::where('id', '=', $id)
+                                                           //->with()   //not sure if needed to specify
+                                                           ->firstOrFail();
+        //possible to add get ... , but should work already
+        //at the moment just the pure basics
+        $response = [
+            'id'        => $guestListAttendanceList->id,
+            'name'      => $guestListAttendanceList->name,
+            'surname'   => $guestListAttendanceList->surname,
+            'comment'   => $guestListAttendanceList->comment,
+        ];
+        
+        if (Request::ajax()) {
+            return response()->json($response);
+        } else {
+            return response()->json($respons);
+        }
+
     }
 
     /**
@@ -96,9 +118,21 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GuestListAttendanceList $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Check if it's our form (CSRF protection)
+        if ( Session::token() !== Input::get( '_token' ) ) {
+            return response()->json('Fehler: die Session ist abgelaufen. Bitte aktualisiere die Seite und logge dich ggf. erneut ein.', 401);
+        }
+
+        Utilities::clearIcalCache();
+
+         // If we only want to modify the item via management pages - do it without evaluating the rest
+        if ( !empty($request->get('id')) AND is_numeric($request->get('id')) ) {
+
+        // Find the corresponding entry object 
+        $guestListAttendanceList = GuestListAttendanceList::where('id', '=', $request->get('id'))->first();
+        
     }
 
     /**
