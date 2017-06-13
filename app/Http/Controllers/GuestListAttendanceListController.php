@@ -71,16 +71,16 @@ class GuestListAttendanceListController extends Controller
             $activeTemplate = $template->guest_attendance_list;
             
             //get template
-            $guestlistattendancelist               = $template->getGuestListAttendanceList()->get();
-            $personidclub       = $template->getGuestListAttendanceList->personidclub;
-            $personid           = $template->getGuestListAttendanceList->personid;
-            $name               = $template->getGuestListAttendanceList->name;
-            $surname            = $template->getGuestListAttendanceList->surname;
-            $status             = $template->getGuestListAttendanceList->status;
-            $comment            = $template->getGuestListAttendanceList->comment;
-            $importsource       = $template->getGuestListAttendanceList->importsource;    //?
-            $attendancestatus   = $template->getGuestListAttendanceList->attendancestatus;
-            $evnt_id            = $template->getGuestListAttendanceList->evnt_id;
+            $guestlistattendancelist    = $template->getGuestListAttendanceList()->get();
+            $personidclub               = $template->getGuestListAttendanceList->personidclub;
+            $personid                   = $template->getGuestListAttendanceList->personid;
+            $name                       = $template->getGuestListAttendanceList->name;
+            $surname                    = $template->getGuestListAttendanceList->surname;
+            $status                     = $template->getGuestListAttendanceList->status;
+            $comment                    = $template->getGuestListAttendanceList->comment;
+            $importsource               = $template->getGuestListAttendanceList->importsource;    //?
+            $attendancestatus           = $template->getGuestListAttendanceList->attendancestatus;
+            $evnt_id                    = $template->getGuestListAttendanceList->evnt_id;
             //$eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
 
         } else {
