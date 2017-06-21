@@ -71,31 +71,31 @@ class GuestListAttendanceListController extends Controller
             $activeTemplate = $template->guest_attendance_list;
             
             //get template
-            $guestlistattendancelist               = $template->getGuestListAttendanceList()->get();
-            $personidclub       = $template->getGuestListAttendanceList->personidclub;
-            $personid           = $template->getGuestListAttendanceList->personid;
-            $name               = $template->getGuestListAttendanceList->name;
-            $surname            = $template->getGuestListAttendanceList->surname;
-            $status             = $template->getGuestListAttendanceList->status;
-            $comment            = $template->getGuestListAttendanceList->comment;
-            $importsource       = $template->getGuestListAttendanceList->importsource;    //?
-            $attendancestatus   = $template->getGuestListAttendanceList->attendancestatus;
-            $evnt_id            = $template->getGuestListAttendanceList->evnt_id;
+            $guestlistattendancelist    = $template->getGuestListAttendanceList()->get();
+            $personidclub               = $template->getGuestListAttendanceList->personidclub;
+            $personid                   = $template->getGuestListAttendanceList->personid;
+            $name                       = $template->getGuestListAttendanceList->name;
+            $surname                    = $template->getGuestListAttendanceList->surname;
+            $status                     = $template->getGuestListAttendanceList->status;
+            $comment                    = $template->getGuestListAttendanceList->comment;
+            $importsource               = $template->getGuestListAttendanceList->importsource;    //?
+            $attendancestatus           = $template->getGuestListAttendanceList->attendancestatus;
+            $evnt_id                    = $template->getGuestListAttendanceList->evnt_id;
             //$eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
 
         } else {
             // fill variables with no data if no template was chosen, but not sure if needed here
             $activeTemplate = "";
-            $guestlistattendancelist               = null;
-            $personidclub       = null;
-            $personid           = null;
-            $name               = null;
-            $surname            = null;
-            $status             = null;
-            $comment            = null;
-            $importsource       = null;
-            $attendancestatus   = null;
-            $evnt_id            = null;
+            $guestlistattendancelist    = null;
+            $personidclub               = null;
+            $personid                   = null;
+            $name                       = null;
+            $surname                    = null;
+            $status                     = null;
+            $comment                    = null;
+            $importsource               = null;
+            $attendancestatus           = null;
+            $evnt_id                    = null;
             //$eventid            = null;      //maybe get eventid from event page
         }
                 
@@ -126,28 +126,7 @@ class GuestListAttendanceListController extends Controller
      */
     public function show($id)
     {
-       /*$entry = GuestListAttendanceList::where('id', '=', $id)
-                              ->firstOrFail();
-
-      
-
-        $ldapId = !is_null($entry->getPerson) ? $entry->getPerson->prsn_ldap_id : "";
-        $response = [
-            'id'                => $entry->id,
-            'name'              => !is_null($entry->getPerson) ? $entry->getPerson->name          : "=FREI=",
-            'prsn_ldap_id'      => $ldapId,
-            'prsn_status'       => !is_null($entry->getPerson) ? $entry->getPerson->prsn_status        : "",
-            'comment'           => $entry->entry_user_comment,
-            'is_current_user'   => $ldapId == Session::get('userId')
-        ];
-
-        if (Request::ajax()) {
-            return response()->json($response);
-        } else {     
-            return response()->json($response);
-            //return View::make('items.index');
-        }
-        */
+        //
     }
 
     /**
@@ -158,9 +137,7 @@ class GuestListAttendanceListController extends Controller
      */
     public function edit($id)
     {
-        /*
-            //edit existing entrys
-        */
+        //
     }
 
     /**
