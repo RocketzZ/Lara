@@ -1,4 +1,3 @@
-Guestlist to be integrated here.
 @if($guestlistattendancelist->evnt_id != '')
 
 <div class="panel panel-warning">
