@@ -127,6 +127,23 @@ class GuestListAttendanceListController extends Controller
     public function show($id)
     {
         //
+        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)
+                                                           //->with()   //not sure if needed to specify
+                                                           ->firstOrFail();
+        //possible to add get ... , but should work already
+        //at the moment just the pure basics
+        $response = [
+            'id'        => $guestlistattendancelist->id,
+            'name'      => $guestlistattendancelist->name,
+            'surname'   => $guestlistattendancelist->surname,
+            'comment'   => $guestlistattendancelist->comment,
+        ];
+        
+        if (Request::ajax()) {
+            return response()->json($response);
+        } else {
+            return response()->json($response);
+        }
     }
 
     /**
