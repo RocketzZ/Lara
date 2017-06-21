@@ -147,28 +147,30 @@ class GuestListAttendanceListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($evnt_id)
+    public function update($id)
     {
-        //here could be the ajax server stuff, but not sure ask patche if possible        
         $guestlistattendancelist = new GuestListAttendanceList;
+        
 
-        if (!is_null($evnt_id))
-            {
-                $guestlistattendancelist = GuestListAttendanceList::findOrFail($evnt_id);
-            }
-        // log the action
-        //Log::info('List edited: ' . Session::get('userName') . ' (' . Session::get('userId') . ', '
-          //       . Session::get('userGroup') . ') edited list "' . $guestlistattendancelist->id . '" (name: ' . $guestlistattendancelist->name . ') ' + ' 
-            //        (surname: ' . $guestlistattendancelist->surname . ') on ' . $guestlistattendancelist->id . '.');
+        // format: strings; no validation needed
+        $guestlistattendancelist->name        = Input::get('name');
+        $guestlistattendancelist->surname     = Input::get('surname');
+        $guestlistattendancelist->comment     = Input::get('comment');
+        //all the rest of the data is automated
 
-
-        // save all data in the database
+        // format: tinyInt; validate on filled value
+        // reversed this: input=1 means "event is public", input=0 means "event is private"
+        //$guestlistattendancelist->evnt_is_private = (Input::get('isPrivate') == '1') ? 0 : 1;
+        //$guestlistattendancelistIsPublished = Input::get('evntIsPublished');
+        
+        
+        
+        //here could be the ajax server stuff, but not sure ask patche if possible        
+        
         $guestlistattendancelist->save();
         
-       // foreach($guestentries as $entry)
-       //     $entry->save();
-        Utilities::clearIcalCache();
-        return $guestlistattendancelist;
+        return redirect()->back()->withInput();
+       
     }
 
     /**
@@ -198,7 +200,7 @@ class GuestListAttendanceListController extends Controller
     */
     private function editList($id)
     {
-         $guestlistattendancelist = new GuestListAttendanceList;
+        $guestlistattendancelist = new GuestListAttendanceList;
         if(!is_null($id)) {
             $guestlistattendancelist = GuestListAttendanceList::findOrFail($id);
         }

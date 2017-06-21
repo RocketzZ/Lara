@@ -79,22 +79,22 @@ class GuestAttendanceEntryController extends Controller
     public function show($id)
     {
         //
-        $guestListAttendanceList = GuestListAttendanceList::where('id', '=', $id)
+        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)
                                                            //->with()   //not sure if needed to specify
                                                            ->firstOrFail();
         //possible to add get ... , but should work already
         //at the moment just the pure basics
         $response = [
-            'id'        => $guestListAttendanceList->id,
-            'name'      => $guestListAttendanceList->name,
-            'surname'   => $guestListAttendanceList->surname,
-            'comment'   => $guestListAttendanceList->comment,
+            'id'        => $guestlistattendancelist->id,
+            'name'      => $guestlistattendancelist->name,
+            'surname'   => $guestlistattendancelist->surname,
+            'comment'   => $guestlistattendancelist->comment,
         ];
         
         if (Request::ajax()) {
             return response()->json($response);
         } else {
-            return response()->json($respons);
+            return response()->json($response);
         }
 
     }
@@ -131,7 +131,7 @@ class GuestAttendanceEntryController extends Controller
         if ( !empty($request->get('id')) AND is_numeric($request->get('id')) ) {
 
         // Find the corresponding entry object 
-        $guestListAttendanceList = GuestListAttendanceList::where('id', '=', $request->get('id'))->first();
+        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $request->get('id'))->first();
         
     }
 
