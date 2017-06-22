@@ -145,6 +145,8 @@ class GuestListAttendanceListController extends Controller
         } else {
             return response()->json($response);
         }
+
+        return redirect()->back()->withErrors(compact('guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus', 'id'));
     }
 
     /**
@@ -166,15 +168,24 @@ class GuestListAttendanceListController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update($id)
-    {
+    {   
         $guestlistattendancelist = new GuestListAttendanceList;
+        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->get('id'))->first();
+
+        $id                 = $guestlistattendancelist->get('id');
+        $name               = $guestlistattendancelist->get('name');
+        $surname            = $guestlistattendancelist->get('surname');
+        $comment            = $guestlistattendancelist->get('comment');
+        $attendancestatus   = $guestlistattendancelist->get('attendancestatus');
+         
+        
         
 
         // format: strings; no validation needed
-        $guestlistattendancelist->name              = Input::get('name');
-        $guestlistattendancelist->surname           = Input::get('surname');
-        $guestlistattendancelist->comment           = Input::get('comment');
-        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
+        $guestentry->name              = Input::get('name');
+        $guestentry->surname           = Input::get('surname');
+        $guestentry->comment           = Input::get('comment');
+        $guestentry->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
 
         // format: tinyInt; validate on filled value
@@ -185,10 +196,19 @@ class GuestListAttendanceListController extends Controller
         
         
         //here could be the ajax server stuff, but not sure ask patche if possible        
+        //$guestlistattendancelist->save();
+        $guestentry->save();
         
-        $guestlistattendancelist->save();
-        
-        return redirect()->back()->withInput();
+        return response()->json([
+            "id"                => $guestentry->id,
+            "comment"           => $guestentry->comment,
+            "name"              => $guestentry->name,
+            "surname"           => $guestentry->surname,
+            "attendancestatus"  => $guestentry->attendancestatus
+        ], 200);
+
+
+        //return redirect()->back()->withInput();
        
     }
 

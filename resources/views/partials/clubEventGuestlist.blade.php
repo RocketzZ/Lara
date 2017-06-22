@@ -1,4 +1,4 @@
-@if($guestlistattendancelist->evnt_id != '')
+@if($gueslistattendancelist->evnt_id != '')
 
 <div class="panel panel-warning">
 
@@ -6,28 +6,32 @@
 
 		<div class="row paddingTop">
 			
+			@foreach($guestentry as $guestlistattendancelist)
+
+			{{-- Add new Guestentries --}}
+		
 			{!! Form::open( array('method' => 'PUT',
-		   						  'route' => ['guestentry.update', $guestlistattendancelist->id],
-								  'id' => $guestlistattendancelist->id,))
+		   						  'route' => ['guestentry.update', $guestentry->id],
+								  'id' => $guestentry->id,))
 			!!}
 			
 			{{-- Firstname and Surname --}}
 
 				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
-					{!! Form::text(	'name' . $guestlistattendancelist->id,
-									Input::old('name' . $guestlistattendancelist->id),
+					{!! Form::text(	'name' . $guestentry->id,
+									Input::old('name' . $guestentry->id),
 									array(	'placeholder'=>Lang::get('mainLang.firstname'),
-											'id'=>'name' . $guestlistattendancelist->id,
+											'id'=>'name' . $guestentry->id,
 											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 				</div>
 				&nbsp;&nbsp;
 
 				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
-					{!! Form::text(	'surname' . $guestlistattendancelist->id,
-									$guestlistattendancelist->surname,
+					{!! Form::text(	'surname' . $guestentry->id,
+									$guestentry->surname,
 									array(	'placeholder'=>Lang::get('mainLang.surname'),
-											'id'=>'surname' . $guestlistattendancelist->id,
+											'id'=>'surname' . $guestentry->id,
 											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 				</div>
@@ -38,22 +42,22 @@
 
 				<div class="col-md-6 col-sm-12 col-xs-12 no-margin">
 					<span class="pull-left">
-						{!! $guestlistattendancelist->comment == "" ? '<i class="fa fa-comment-o"></i>' : '<i class="fa fa-comment"></i>' !!}
+						{!! $guestentry->comment == "" ? '<i class="fa fa-comment-o"></i>' : '<i class="fa fa-comment"></i>' !!}
 						&nbsp;&nbsp;
 					</span>
 
-					{!! Form::text(	'comment' . $guestlistattendancelist->id,
-									$guestlistattendancelist->comment,
+					{!! Form::text(	'comment' . $guestentry->id,
+									$guestentry->comment,
 									array(	'placeholder'=>Lang::get('mainLang.addComment'),
-										'id'=>'comment' . $guestlistattendancelist->id,
-										'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+											'id'=>'comment' . $guestentry->id,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 			
 				</div>
 
 				<label for="attendancestatus">{{ trans('mainLang.Attendancestatus') }}</label>
-				{!! Form::checkbox(	'attendancestatus' . $guestlistattendancelist->id,
-									$guestlistattendancelist->attendancestatus,
+				{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
+									$guestentry->attendancestatus,
 									'0', false)
 				!!} 
 
@@ -61,7 +65,10 @@
       			<button class="btn btn-primary" id="saveGuestentry">{{trans('mainLang.Save')}}</button> 
 
 			{!! Form::close() !!}
-		</div>	
+
+			@endforeach
+
+		</div>
 	</div>
 </div>
 @else
