@@ -133,10 +133,11 @@ class GuestListAttendanceListController extends Controller
         //possible to add get ... , but should work already
         //at the moment just the pure basics
         $response = [
-            'id'        => $guestlistattendancelist->id,
-            'name'      => $guestlistattendancelist->name,
-            'surname'   => $guestlistattendancelist->surname,
-            'comment'   => $guestlistattendancelist->comment,
+            'id'                => $guestlistattendancelist->id,
+            'name'              => $guestlistattendancelist->name,
+            'surname'           => $guestlistattendancelist->surname,
+            'comment'           => $guestlistattendancelist->comment,
+            'attendancestatus'  => $guestlistattendancelist->attendancestatus,
         ];
         
         if (Request::ajax()) {
@@ -170,9 +171,10 @@ class GuestListAttendanceListController extends Controller
         
 
         // format: strings; no validation needed
-        $guestlistattendancelist->name        = Input::get('name');
-        $guestlistattendancelist->surname     = Input::get('surname');
-        $guestlistattendancelist->comment     = Input::get('comment');
+        $guestlistattendancelist->name              = Input::get('name');
+        $guestlistattendancelist->surname           = Input::get('surname');
+        $guestlistattendancelist->comment           = Input::get('comment');
+        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
 
         // format: tinyInt; validate on filled value
@@ -223,9 +225,10 @@ class GuestListAttendanceListController extends Controller
         }
 
         // format: strings; no validation needed
-        $guestlistattendancelist->name        = Input::get('name');
-        $guestlistattendancelist->surname     = Input::get('surname');
-        $guestlistattendancelist->comment     = Input::get('comment');
+        $guestlistattendancelist->name              = Input::get('name');
+        $guestlistattendancelist->surname           = Input::get('surname');
+        $guestlistattendancelist->comment           = Input::get('comment');
+        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
 
         // format: tinyInt; validate on filled value
