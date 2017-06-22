@@ -237,7 +237,10 @@ class ClubEventController extends Controller
         $clubEvent->evnt_private_details = Utilities::surroundLinksWithTags($clubEvent->evnt_private_details);
 
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
-        $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->id);
+        $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->evnt_id);
+        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->id)
+                                                ->with('name', 'surname', 'comment', 'attendancestatus')
+                                                ->get();
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)
                                 ->with('getJobType',
