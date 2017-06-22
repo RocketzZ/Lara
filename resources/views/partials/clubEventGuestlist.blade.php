@@ -51,6 +51,13 @@
 			
 				</div>
 
+				{!! Form::button( 'attendancestatus' . $guestlistattendancelist->id,
+								$guestlistattendancelist->attendancestatus,
+								array(	'name'=>'attendancestatus' . $guestlistattendancelist->id,
+										'id'=>'attendancestatus' . $guestlistattendancelist->id,
+										'class'=>'btn btn-small btn-success hide'))
+				!!} 
+
 				{!! Form::submit('Eintrag speichern', array('class'=>'hidden', 'id'=>'button-create-submit')) !!} 
       			<button class="btn btn-primary" id="saveGuestentry"></button> 
 
