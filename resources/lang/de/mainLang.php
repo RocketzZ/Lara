@@ -79,11 +79,12 @@ return [
     'Guestlist'             => 'Gästeliste',
     'Attendancelist'        => 'Anwesenheitsliste',
     'Schedule'              => 'Dienstplan',
-
+    'Attendancestatus'      => 'Anwesend:',
     'hideTimes'             => 'Zeiten ausblenden',
     
     'addComment'            => 'Kommentar hier hinzufügen',  //not used Line ClubEventView ~270 Placeholder message and similar
-    
+    'Save'                  => 'Speichern',
+
     //List of Changes
     'listChanges'           => 'Liste der Änderungen',
 

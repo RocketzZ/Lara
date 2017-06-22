@@ -78,11 +78,12 @@ return [
     'Guestlist'             => 'Matrosenliste',
     'Attendancelist'        => 'Gefangenenliste',
     'Schedule'              => 'Meuterplan',
-
+    'Attendancestatus'      => 'An Bord:',
     'hideTimes'             => 'Gläser wegpacken',
     
     'addComment'            => 'Blödsinn ausrufen',  //not used Line ClubEventView ~270 Placeholder message and similar
-    
+    'Save'                  => 'Save',
+
     //List of Changes
     'listChanges'           => 'Schiffsregister',
 

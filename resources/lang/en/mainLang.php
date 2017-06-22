@@ -80,8 +80,9 @@ return [
     'Guestlist'             => 'Guest List',
     'Attendancelist'        => 'Attendance List',
     'Schedule'              => 'Schedule',
-
+    'Attendancestatus'      => 'Attending:',
     'addComment'            => 'add comment here',  //not used Line ClubEventView ~270 Placeholder message and similar
+    'Save'                  => 'Sichern!',
 
     //List of Changes
     'listChanges'           => 'List of changes',

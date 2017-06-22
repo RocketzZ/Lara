@@ -43,23 +43,22 @@
 					</span>
 
 					{!! Form::text(	'comment' . $guestlistattendancelist->id,
-								$guestlistattendancelist->comment,
-								array(	'placeholder'=>Lang::get('mainLang.addComment'),
+									$guestlistattendancelist->comment,
+									array(	'placeholder'=>Lang::get('mainLang.addComment'),
 										'id'=>'comment' . $guestlistattendancelist->id,
 										'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 			
 				</div>
 
-				{!! Form::button( 'attendancestatus' . $guestlistattendancelist->id,
-								$guestlistattendancelist->attendancestatus,
-								array(	'name'=>'attendancestatus' . $guestlistattendancelist->id,
-										'id'=>'attendancestatus' . $guestlistattendancelist->id,
-										'class'=>'btn btn-small btn-success hide'))
+				<label for="attendancestatus">{{ trans('mainLang.Attendancestatus') }}</label>
+				{!! Form::checkbox(	'attendancestatus' . $guestlistattendancelist->id,
+									$guestlistattendancelist->attendancestatus,
+									'0', false)
 				!!} 
 
 				{!! Form::submit('Eintrag speichern', array('class'=>'hidden', 'id'=>'button-create-submit')) !!} 
-      			<button class="btn btn-primary" id="saveGuestentry"></button> 
+      			<button class="btn btn-primary" id="saveGuestentry">{{trans('mainLang.Save')}}</button> 
 
 			{!! Form::close() !!}
 		</div>	
