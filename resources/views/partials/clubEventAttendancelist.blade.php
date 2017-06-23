@@ -166,6 +166,7 @@
 	</div>
 </div>
 
+@include clubAttendanceStatisitc
 
 
 
