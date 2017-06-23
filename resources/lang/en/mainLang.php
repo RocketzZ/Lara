@@ -352,9 +352,14 @@ return [
     'sort'                       => 'Sort', 
     'sortByName'                 => 'By name', 
     'sortByClub'                 => 'By club', 
-    'sortByAttendancestatus'     => 'By attendancestatus', 
-    
- //------------------------------------------------------------------------------------------------------------
+    'sortByAttendancestatus'     => 'By attendancestatus',
+
+    //-----------------------------------------------------------------------------------------------------------
+    // /resources/views/partials/clubAttendanceStatistic.blade.php
+    'AttendanceStatisticHeader'  => 'Attendance Statistic',
+    'AttendanceDate'             => 'Date',
+
+    //------------------------------------------------------------------------------------------------------------
 
     // /resources/views/partials/weekCellFull.blade.php
     'hide'                  => 'Hide',

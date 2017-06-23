@@ -350,7 +350,12 @@ return [
     'sort'                       => 'Sortieren', 
     'sortByName'                 => 'nach dem Namen', 
     'sortByClub'                 => 'nach Verein', 
-    'sortByAttendancestatus'     => 'nach dem Anwesenheitsstatus', 
+    'sortByAttendancestatus'     => 'nach dem Anwesenheitsstatus',
+
+    //-----------------------------------------------------------------------------------------------------------
+     // /resources/views/partials/clubAttendanceStatistic.blade.php
+    'AttendanceStatisticHeader'  => 'Anwesenheitsstatistik',
+    'AttendanceDate'             => 'Datum',
     
  //-----------------------------------------------------------------------------------------------------------
 
