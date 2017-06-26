@@ -81,6 +81,7 @@ class GuestListAttendanceListController extends Controller
             $importsource               = $template->getGuestListAttendanceList->importsource;    //?
             $attendancestatus           = $template->getGuestListAttendanceList->attendancestatus;
             $evnt_id                    = $template->getGuestListAttendanceList->evnt_id;
+            $guestentry                 = $template->getGuestEntry->id;
             //$eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
 
         } else {
@@ -96,11 +97,12 @@ class GuestListAttendanceListController extends Controller
             $importsource               = null;
             $attendancestatus           = null;
             $evnt_id                    = null;
+            $guestentry                 = null;
             //$eventid            = null;      //maybe get eventid from event page
         }
                 
         //return values for creating new table entry
-        return redirect()->back()->withErrors(compact('guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus'));
+        return redirect()->back()->withErrors(compact('guestentry', 'guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus'));
         
                //View::make('createGuestAttendanceList', compact('personidclub','personid','name','surname',
                //                                                'status','comment','importsource',
@@ -186,6 +188,12 @@ class GuestListAttendanceListController extends Controller
         $guestentry->surname           = Input::get('surname');
         $guestentry->comment           = Input::get('comment');
         $guestentry->attendancestatus  = Input::get('attendancestatus');
+
+
+        $guestlistattendancelist->name              = Input::get('name');
+        $guestlistattendancelist->surname           = Input::get('surname');
+        $guestlistattendancelist->comment           = Input::get('comment');
+        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
 
         // format: tinyInt; validate on filled value
@@ -196,17 +204,16 @@ class GuestListAttendanceListController extends Controller
         
         
         //here could be the ajax server stuff, but not sure ask patche if possible        
-        //$guestlistattendancelist->save();
+        $guestlistattendancelist->save();
         $guestentry->save();
         
-        return response()->json([
-            "id"                => $guestentry->id,
-            "comment"           => $guestentry->comment,
-            "name"              => $guestentry->name,
-            "surname"           => $guestentry->surname,
-            "attendancestatus"  => $guestentry->attendancestatus
-        ], 200);
-
+        return response()->json([ 
+            "id"                => $guestentry->id, 
+            "comment"           => $guestentry->comment, 
+            "name"              => $guestentry->name, 
+            "surname"           => $guestentry->surname, 
+            "attendancestatus"  => $guestentry->attendancestatus 
+        ], 200); 
 
         //return redirect()->back()->withInput();
        

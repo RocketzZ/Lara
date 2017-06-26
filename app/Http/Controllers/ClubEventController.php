@@ -107,7 +107,7 @@ class ClubEventController extends Controller
             $info       = $template->getClubEvent->evnt_public_info;
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
-            $guestlistattendancelist = $template->getGuestListAttendanceList->get();
+            $guestlistattendancelist = $template->getGuestListAttendanceList->with('getGuestEntry')->get();
         } else {
             // fill variables with no data if no template was chosen
             $activeTemplate = "";
@@ -155,9 +155,9 @@ class ClubEventController extends Controller
         $newEvent = $this->editClubEvent(null);
         $newEvent->save();
 
-        $newGuestListAttendanceList = (new GuestListAttendanceListController)->update(null);
-        $newGuestListAttendanceList->evnt_id = $newEvent->id;
-        $newGuestListAttendanceList->save();
+        $guestlistattendancelist = (new GuestListAttendanceListController)->create(null);
+        $guestlistattendancelist->evnt_id = $newEvent->id;
+        
 
         $newSchedule = (new ScheduleController)->update(null);
         $newSchedule->evnt_id = $newEvent->id;
@@ -238,9 +238,8 @@ class ClubEventController extends Controller
 
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
         $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->evnt_id);
-        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->id)
-                                                ->with('name', 'surname', 'comment', 'attendancestatus')
-                                                ->get();
+        $guestentry = GuestListAttendanceList::findOrFail($clubEvent->getGuestEntry->id);
+        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->id)->get();
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)
                                 ->with('getJobType',

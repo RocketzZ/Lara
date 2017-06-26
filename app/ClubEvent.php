@@ -78,6 +78,10 @@ class ClubEvent extends Model
 	public function getGuestListAttendanceList() {
 		return $this->hasOne('Lara\GuestListAttendanceList', 'evnt_id', 'id');
 	}
+
+	public function getGuestEntry() {
+		return $this->belongsTo('Lara\GuestListAttendanceList', 'id');
+	}
     /**
      * Check if the signed in user has a shift in the current event
      * Looks up in table ScheduleEntry for entries, which has the same scheduleId like id of ClubEvent instance.
