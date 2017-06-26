@@ -33,7 +33,8 @@ class GuestListAttendanceList extends Model
                                                     //->...
                                                     //4->added via facebook import
                                  'attendancestatus',
-                                 'evnt_id');
+                                 'evnt_id',
+                                 'id');
 
 //name functions correctly and get data
 public function getUserID() {

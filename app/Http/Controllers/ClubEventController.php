@@ -107,7 +107,7 @@ class ClubEventController extends Controller
             $info       = $template->getClubEvent->evnt_public_info;
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
-            $guestlistattendancelist = $template->getGuestListAttendanceList->with('getGuestEntry')->get();
+            $guestlistattendancelist = $template->getGuestListAttendanceList->get();
         } else {
             // fill variables with no data if no template was chosen
             $activeTemplate = "";
@@ -237,9 +237,13 @@ class ClubEventController extends Controller
         $clubEvent->evnt_private_details = Utilities::surroundLinksWithTags($clubEvent->evnt_private_details);
 
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
-        $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->evnt_id);
-        $guestentry = GuestListAttendanceList::findOrFail($clubEvent->getGuestEntry->id);
-        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->id)->get();
+       
+        $guestlistattendancelist = GuestListAttendanceList::where('evnt_id', '=', $clubEvent->evnt_id)->get();
+        
+        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->get('id'))
+                                                ->with( 'getGuestEntry',
+                                                        'getGuestListAttendanceList')
+                                                ->get();
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)
                                 ->with('getJobType',

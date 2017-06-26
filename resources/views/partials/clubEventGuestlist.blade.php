@@ -1,4 +1,4 @@
-@if($gueslistattendancelist->evnt_id != '')
+@if($guestlistattendancelist->evnt_id != '')
 
 <div class="panel panel-warning">
 
