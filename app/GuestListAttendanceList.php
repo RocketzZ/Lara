@@ -45,5 +45,12 @@ public function getEventID() {
         return $this->belongsTo('Lara\ClubEvent', 'evnt_id', 'id');
     }
 
+public function getGuestListAttendanceList() {
+		return $this->hasOne('Lara\GuestListAttendanceList', 'evnt_id', 'id');
+	}
+
+	public function getGuestEntry() {
+		return $this->belongsTo('Lara\GuestListAttendanceList', 'id');
+	}
 
 }
