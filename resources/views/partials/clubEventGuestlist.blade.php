@@ -65,7 +65,7 @@
 			
 			{{--Only allow logged in Members to change Guestentries--}}
 
-				@if (Session::has('userID'))
+				@if (Session::has("userName"))
 					{!! Form::submit('Eintrag speichern', array('class'=>'hidden')) !!}
 				@endif
 
