@@ -66,7 +66,7 @@
 			{{--Only allow logged in Members to change Guestentries--}}
 
 				@if (Session::has("userName"))
-					{!! Form::submit('Eintrag speichern', array('class'=>'hidden')) !!}
+					{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden')) !!}
 				@endif
 
 			{!! Form::close() !!}
@@ -74,7 +74,9 @@
 			@endforeach
 
 		{{--Add one empty Field at the End--}}
-
+			
+			<span hidden>{{$guestentry->id = ++$guestentry->id}}</span>
+			
 			{!! Form::open( array('method' => 'PUT',
 		   						  'route' => ['guestentry.update', $guestentry->id],
 								  'id' => $guestentry->id,
@@ -121,7 +123,7 @@
 			
 				</div>				
 				
-				{!! Form::submit( 'Eintrag speichern', array('class'=>'hidden')) !!}
+				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden')) !!}
 			
 			{!! Form::close() !!}
 

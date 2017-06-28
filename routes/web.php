@@ -118,7 +118,7 @@ Route::resource('person', 	'PersonController', 		['only'   => ['index']]);
 Route::resource('club', 	'ClubController', 			['only'   => ['index']]);
 Route::resource('survey',	'SurveyController',			['except' => ['index']]);
 Route::resource('survey.answer', 'SurveyAnswerController', ['only' => ['show', 'store', 'update', 'destroy']]);
-Route::resource('guestentry', 'GuestListAttendanceListController');
+Route::resource('guestentry', 'GuestListAttendanceListController', ['except' => ['index', 'create', 'store', 'edit', 'destroy']]);
 
 
 // STATISTICS
