@@ -42,7 +42,7 @@ public function getUserID() {
 	}
 
 public function getEventID() {
-        return $this->belongsTo('Lara\club_events', 'eventid', 'id');
+        return $this->belongsTo('Lara\club_events', 'evnt_id', 'id');
     }
 
 
