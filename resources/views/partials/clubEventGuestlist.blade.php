@@ -5,8 +5,12 @@
 	<div class="panel-body no-padding">
 
 		<div class="row paddingTop">
+		
 			
-			@foreach($guestentry as $guestlistattendancelist)
+			
+			
+			
+			@foreach($guestentry as $guestentry)
 
 			{{-- Add new Guestentries --}}
 		

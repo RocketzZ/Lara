@@ -49,7 +49,8 @@ class ClubEvent extends Model
 								'guestlistattendancelist',	//true 	->guest list wanted
 															//false ->attendance list wanted
 															//NULL 	->neither wanted 
-								'evnt_is_published');
+								'evnt_is_published',
+								'id');
 
 	/**
 	 * Get the corresponding place.
