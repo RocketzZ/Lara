@@ -38,11 +38,11 @@ class GuestListAttendanceList extends Model
 
 //name functions correctly and get data
 public function getUserID() {
-		return $this->belongsTo('Lara\users', 'personid', 'id');
+		return $this->belongsTo('Lara\Person', 'personid', 'id');
 	}
 
 public function getEventID() {
-        return $this->belongsTo('Lara\club_events', 'evnt_id', 'id');
+        return $this->belongsTo('Lara\ClubEvent', 'evnt_id', 'id');
     }
 
 
