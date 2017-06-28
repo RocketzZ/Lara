@@ -107,7 +107,8 @@ class ClubEventController extends Controller
             $info       = $template->getClubEvent->evnt_public_info;
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
-            $guestlistattendancelist = $template->getGuestListAttendanceList->get();
+            $guestlistattendancelist = $template->getGuestListAttendanceList->with('getEventID')->get();
+            $guestentry = $template->getGuestEntry->id;
         } else {
             // fill variables with no data if no template was chosen
             $activeTemplate = "";
@@ -124,6 +125,7 @@ class ClubEventController extends Controller
             $details                    = null;
             $private                    = null;
             $guestlistattendancelist    = null;
+            $guestentry                 = null;
         }
                 
         return View::make('createClubEventView', compact('places', 'jobtypes', 'templates', 
@@ -132,7 +134,7 @@ class ClubEventController extends Controller
                                                          'info', 'details', 'private',
                                                          'guestlistattendancelist','dv',
                                                          'activeTemplate', 
-                                                         'date'));
+                                                         'date', 'guestentry'));
     }
 
 
@@ -238,7 +240,9 @@ class ClubEventController extends Controller
 
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
        
-        $guestlistattendancelist = GuestListAttendanceList::where('evnt_id', '=', $clubEvent->evnt_id)->get();
+        $guestlistattendancelist = GuestListAttendanceList::where('evnt_id', '=', $clubEvent->id)
+                                                            ->with('getEventID')
+                                                            ->get();
         
         $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->get('id'))
                                                 ->with( 'getGuestEntry',
@@ -288,7 +292,7 @@ class ClubEventController extends Controller
 
 
 
-        return View::make('clubEventView', compact('clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'guestlistattendancelist'));
+        return View::make('clubEventView', compact('evnt_id', 'clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'guestlistattendancelist', 'guestentry'));
     }
 
 
