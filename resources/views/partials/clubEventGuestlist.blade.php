@@ -23,7 +23,7 @@
 
 				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
 					{!! Form::text(	'name' . $guestentry->id,
-									Input::old('name' . $guestentry->id),
+									$guestentry->name,
 									array(	'placeholder'=>Lang::get('mainLang.firstname'),
 											'id'=>'name' . $guestentry->id,
 											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
