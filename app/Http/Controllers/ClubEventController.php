@@ -293,7 +293,7 @@ class ClubEventController extends Controller
 
 
 
-        return View::make('clubEventView', compact('guestentry', 'guestlistattendancelist', 'clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'guestlistattendancelist', 'guestentry'));
+        return View::make('clubEventView', compact('guestentry', 'guestlistattendancelist', 'clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'id'));
     }
 
 

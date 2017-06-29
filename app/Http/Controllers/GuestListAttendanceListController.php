@@ -215,7 +215,7 @@ class GuestListAttendanceListController extends Controller
         $guestentry->save();
         return redirect()->back(); //->withInput();
     }*/
-    public function update(Request $request, $id)
+    public function update($id)
     {
         // Check credentials: you can only edit, if you have rights for marketing, section management or admin
         if(!Session::has('userId') 
@@ -230,21 +230,21 @@ class GuestListAttendanceListController extends Controller
 
 
         //get all the data
-        $guestlistattendancelist = GuestListAttendanceList::findOrFail($id);
+        $guestentry = GuestListAttendanceList::findOrFail($id);
 
         //extract requested data
-        $name               = $request->get('name');
-        $surname            = $request->get('surname');
-        $comment            = $request->get('comment');
+        $name               = Input::get('name','Error_name');
+        $surname            = Input::get('surname','Error_surname');
+        $comment            = Input::get('comment','Error_comment');
         //$attendancestatus   = $request->get('attendancestatus');
 
         //write and save changes
-        $guestlistattendancelist->name          =$name;
-        $guestlistattendancelist->surname       =$surname;
-        $guestlistattendancelist->comment       =$comment;
+        $guestentry->name          =$name;
+        $guestentry->surname       =$surname;
+        $guestentry->comment       =$comment;
         //$guestlistattendancelist->attendancestatus
         
-        $guestlistattendancelist->save();
+        $guestentry->save();
 
         return redirect()->back();
     }

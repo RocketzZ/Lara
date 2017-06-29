@@ -75,9 +75,9 @@
 
 		{{--Add one empty Field at the End--}}
 
-			<span hidden>{{$counter = $guestlistattendancelist}}</span>
+			<span hidden>{{$counter = $guestentry->id}}</span>
 
-			{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $guestentry]]) !!}
+			{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $guestentry->id]]) !!}
 			
 				<div id="container" class="container">
 				
@@ -109,7 +109,7 @@
 					
 					</div>
 				</div>
-				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden', )) !!}
+				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden', )) !!}
 			{!! Form::close() !!}
 		</div>
 	</div>
