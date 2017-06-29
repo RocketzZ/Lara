@@ -170,7 +170,7 @@ class GuestListAttendanceListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    /*public function update($id)
     {   
         $guestentry = new GuestListAttendanceList;
         $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)->get();
@@ -184,7 +184,7 @@ class GuestListAttendanceListController extends Controller
         $guestlistattendancelist->name              = Input::get('name');
         $guestlistattendancelist->surname           = Input::get('surname');
         $guestlistattendancelist->comment           = Input::get('comment');
-        //$guestentry->attendancestatus  = Input::get('attendancestatus');
+        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
         
         //
@@ -193,8 +193,8 @@ class GuestListAttendanceListController extends Controller
                     ->where('id', $id)
                     ->update(['name' => $guestlistattendancelist->name],
                              ['surname' => $guestlistattendancelist->surname],
-                             ['comment' => $guestlistattendancelist->comment]
-                             //['attendancestatus']
+                             ['comment' => $guestlistattendancelist->comment],
+                             ['attendancestatus' =>$guestlistattendancelist->attendancestatus]
                             );
         //
         //
@@ -214,7 +214,41 @@ class GuestListAttendanceListController extends Controller
 
         $guestentry->save();
         return redirect()->back(); //->withInput();
+    }*/
+    public function update(Request $request, $id)
+    {
+        // Check credentials: you can only edit, if you have rights for marketing, section management or admin
+        if(!Session::has('userId') 
+            OR (Session::get('userGroup') != 'marketing'
+                AND Session::get('userGroup') != 'clubleitung'
+                AND Session::get('userGroup') != 'admin'))
+        {
+            Session::put('message', trans('mainLang.cantTouchThis'));
+            Session::put('msgType', 'danger');
+            return Redirect::back();
+        }
+
+
+        //get all the data
+        $guestlistattendancelist = GuestListAttendanceList::findOrFail($id);
+
+        //extract requested data
+        $name               = $request->get('name');
+        $surname            = $request->get('surname');
+        $comment            = $request->get('comment');
+        //$attendancestatus   = $request->get('attendancestatus');
+
+        //write and save changes
+        $guestlistattendancelist->name          =$name;
+        $guestlistattendancelist->surname       =$surname;
+        $guestlistattendancelist->comment       =$comment;
+        //$guestlistattendancelist->attendancestatus
+        
+        $guestlistattendancelist->save();
+
+        return redirect()->back();
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -224,7 +258,7 @@ class GuestListAttendanceListController extends Controller
      */
     public function destroy($id)
     {
-        //to destroy an entry
+        GuestListAttendanceList::destroy($id);
     }
 
 
