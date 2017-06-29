@@ -74,9 +74,43 @@
 			@endforeach
 
 		{{--Add one empty Field at the End--}}
-			
-			
 
+			<span hidden>{{$counter = $guestlistattendancelist}}</span>
+
+			{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $guestentry]]) !!}
+			
+				<div id="container" class="container">
+				
+					<div id={{ "box" . ++$counter }} class="box">
+					
+						<input 	type="text"
+								name={{ "name" . $counter }}
+								class="input"
+								id={{ "name" . $counter }}
+								value=""
+								placeholder="{{ trans('mainLang.firstname') }}"
+								required />
+
+						<input 	type="text"
+								name={{ "surname" . $counter }}
+								class="input"
+								id={{ "surname" . $counter }}
+								value=""
+								placeholder="{{ trans('mainLang.surname') }}"
+								required />
+
+						<input 	type="text"
+								name={{ "comment" . $counter }}
+								class="input"
+								id={{ "comment" . $counter }}
+								value=""
+								placeholder="{{ trans('mainLang.addComment') }}"
+								/>
+					
+					</div>
+				</div>
+				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden', )) !!}
+			{!! Form::close() !!}
 		</div>
 	</div>
 </div>
