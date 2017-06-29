@@ -231,6 +231,10 @@ class GuestListAttendanceListController extends Controller
 
         //get all the data
         $guestentry = GuestListAttendanceList::findOrFail($id);
+        if(empty($guestentry))
+        {
+            $guestlistattendancelist = new GuestListAttendanceList;
+        }
 
         //extract requested data
         $name               = Input::get('name','Error_name');
@@ -244,8 +248,15 @@ class GuestListAttendanceListController extends Controller
         $guestentry->comment       =$comment;
         //$guestlistattendancelist->attendancestatus
         
-        $guestentry->save();
 
+        if(empty($guestentry))
+        {
+                $guestlistattendancelist->save();
+        }        
+        else
+        {
+            $guestentry->save();
+        }
         return redirect()->back();
     }
 
