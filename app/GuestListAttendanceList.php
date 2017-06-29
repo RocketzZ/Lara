@@ -49,7 +49,7 @@ public function getGuestListAttendanceList() {
 		return $this->hasOne('Lara\GuestListAttendanceList', 'evnt_id', 'id');
 	}
 
-	public function getGuestEntry() {
+public function getGuestEntry() {
 		return $this->belongsTo('Lara\GuestListAttendanceList', 'id');
 	}
 
