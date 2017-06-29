@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Lara\Http\Requests;
 use Lara\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 use Lara\Utilities;
 use Session;
@@ -171,52 +172,48 @@ class GuestListAttendanceListController extends Controller
      */
     public function update($id)
     {   
-        $guestlistattendancelist = new GuestListAttendanceList;
-        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->get('id'))->first();
+        $guestentry = new GuestListAttendanceList;
+        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)->get();
 
-        $id                 = $guestlistattendancelist->get('id');
-        $name               = $guestlistattendancelist->get('name');
-        $surname            = $guestlistattendancelist->get('surname');
-        $comment            = $guestlistattendancelist->get('comment');
-        $attendancestatus   = $guestlistattendancelist->get('attendancestatus');
+        //$id                 = $guestlistattendancelist->get('id');
+        //$name               = $guestlistattendancelist->get('name');
+        //$surname            = $guestlistattendancelist->get('surname');
+        //$comment            = $guestlistattendancelist->get('comment');
+        //$attendancestatus   = $guestlistattendancelist->get('attendancestatus');
          
-        
-        
-
-        // format: strings; no validation needed
-        $guestentry->name              = Input::get('name');
-        $guestentry->surname           = Input::get('surname');
-        $guestentry->comment           = Input::get('comment');
-        $guestentry->attendancestatus  = Input::get('attendancestatus');
-
-
         $guestlistattendancelist->name              = Input::get('name');
         $guestlistattendancelist->surname           = Input::get('surname');
         $guestlistattendancelist->comment           = Input::get('comment');
         $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
+        
+        //
+        //
+        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)
+                    ->where('id', $id)
+                    ->update(['name' => $guestlistattendancelist->name],
+                             ['surname' => $guestlistattendancelist->surname],
+                             ['comment' => $guestlistattendancelist->comment]
+                             //['attendancestatus' => $guestlistattendancelist->attendancestatus]
+                            );
+        //
+        //
 
         // format: tinyInt; validate on filled value
-        // reversed this: input=1 means "event is public", input=0 means "event is private"
-        //$guestlistattendancelist->evnt_is_private = (Input::get('isPrivate') == '1') ? 0 : 1;
-        //$guestlistattendancelistIsPublished = Input::get('evntIsPublished');
         
+        //$guestlistattendancelist->save();
+        //$guestentry->save();
         
-        
-        //here could be the ajax server stuff, but not sure ask patche if possible        
-        $guestlistattendancelist->save();
-        $guestentry->save();
-        
-        return response()->json([ 
-            "id"                => $guestentry->id, 
-            "comment"           => $guestentry->comment, 
-            "name"              => $guestentry->name, 
-            "surname"           => $guestentry->surname, 
-            "attendancestatus"  => $guestentry->attendancestatus 
-        ], 200); 
+        //return response()->json([ 
+        //    "id"                => $guestentry->id, 
+        //    "comment"           => $guestentry->comment, 
+        //    "name"              => $guestentry->name, 
+        //    "surname"           => $guestentry->surname, 
+        //    "attendancestatus"  => $guestentry->attendancestatus 
+        //], 200); 
 
-        //return redirect()->back()->withInput();
-       
+
+        return redirect()->back()->withInput();
     }
 
     /**
