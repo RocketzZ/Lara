@@ -4,7 +4,7 @@ namespace Lara;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GuestListAttendanceList extends Model
+class GuestAttendanceEntry extends Model
 {
     
     /**
@@ -12,7 +12,7 @@ class GuestListAttendanceList extends Model
      *
      * @var string
      */
-    protected $table = 'guest_attendance_list';
+    protected $table = 'guest_attendance_entry';
 
     /**
      * The database columns used by the model.
@@ -20,9 +20,7 @@ class GuestListAttendanceList extends Model
      *
      * @var array
      */
-     protected $fillable = [    'personidclub',
-                                'personid',
-                                'name',
+     protected $fillable = [    'name',
                                 'surname',
                                 'status',
                                 'comment',
@@ -33,7 +31,7 @@ class GuestListAttendanceList extends Model
                                                     //->...
                                                     //4->added via facebook import
                                 'attendancestatus',
-                                'evnt_id',
+                                'list_id',
                                 ];
 
 //name functions correctly and get data
@@ -41,16 +39,8 @@ public function getUserID() {
 		return $this->belongsTo('Lara\Person', 'personid', 'id');
 	}
 
-public function getEventID() {
-        return $this->belongsTo('Lara\ClubEvent', 'evnt_id', 'id');
-    }
-
 public function getGuestListAttendanceList() {
-		return $this->hasOne('Lara\GuestListAttendanceList', 'evnt_id', 'id');
-	}
-
-public function getGuestEntry() {
-		return $this->hasMany('Lara\GuestAttendanceEntry', 'list_id', 'id');
+		return $this->belongsTo('Lara\GuestListAttendanceList', 'list_id', 'id');
 	}
 
 }

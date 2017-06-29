@@ -50,7 +50,7 @@ class ClubEvent extends Model
 															//false ->attendance list wanted
 															//NULL 	->neither wanted 
 								'evnt_is_published',
-								'id');
+								);
 
 	/**
 	 * Get the corresponding place.
@@ -81,7 +81,7 @@ class ClubEvent extends Model
 	}
 
 	public function getGuestEntry() {
-		return $this->belongsTo('Lara\GuestListAttendanceList', 'id');
+		return $this->belongsTo('Lara\GuestAttendanceEntry', 'list_id', 'id');
 	}
     /**
      * Check if the signed in user has a shift in the current event

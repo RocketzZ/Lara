@@ -29,6 +29,7 @@ use Lara\Person;
 use Lara\Club;
 use Lara\Place;
 use Lara\GuestListAttendanceList;
+use Lara\GuestAttendanceEntry;
 
 class GuestListAttendanceListController extends Controller
 {
@@ -172,28 +173,13 @@ class GuestListAttendanceListController extends Controller
     public function update($id)
     {   
         $guestlistattendancelist = new GuestListAttendanceList;
-        $guestentry = GuestListAttendanceList::where('id', '=', $guestlistattendancelist->get('id'))->first();
 
-        $id                 = $guestlistattendancelist->get('id');
-        $name               = $guestlistattendancelist->get('name');
-        $surname            = $guestlistattendancelist->get('surname');
-        $comment            = $guestlistattendancelist->get('comment');
-        $attendancestatus   = $guestlistattendancelist->get('attendancestatus');
-         
+        if (!is_null($id))
+        {
+            $guestlistattendancelist = GuestListAttendanceList::findOrFail($id);
+        }
         
-        
-
-        // format: strings; no validation needed
-        $guestentry->name              = Input::get('name');
-        $guestentry->surname           = Input::get('surname');
-        $guestentry->comment           = Input::get('comment');
-        $guestentry->attendancestatus  = Input::get('attendancestatus');
-
-
-        $guestlistattendancelist->name              = Input::get('name');
-        $guestlistattendancelist->surname           = Input::get('surname');
-        $guestlistattendancelist->comment           = Input::get('comment');
-        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
+       
         //all the rest of the data is automated
 
         // format: tinyInt; validate on filled value
@@ -205,15 +191,9 @@ class GuestListAttendanceListController extends Controller
         
         //here could be the ajax server stuff, but not sure ask patche if possible        
         $guestlistattendancelist->save();
-        $guestentry->save();
         
-        return response()->json([ 
-            "id"                => $guestentry->id, 
-            "comment"           => $guestentry->comment, 
-            "name"              => $guestentry->name, 
-            "surname"           => $guestentry->surname, 
-            "attendancestatus"  => $guestentry->attendancestatus 
-        ], 200); 
+        
+        return $guestlistattendancelist; 
 
         //return redirect()->back()->withInput();
        

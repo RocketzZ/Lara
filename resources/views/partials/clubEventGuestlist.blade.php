@@ -13,7 +13,7 @@
 			{!! Form::open( array('method' => 'PUT',
 		   						  'route' => ['guestentry.update', $guestentry->id],
 								  'id' => $guestentry->id,
-								  'class' => 'GuestListAttendanceList'))
+								  'class' => 'GuestAttendanceEntry'))
 			!!}
 			
 			{{-- Firstname and Surname --}}

@@ -22,6 +22,7 @@ use Redirect;
 use Session;
 use View;
 use Lara\GuestListAttendanceList;
+use Lara\GuestAttendanceEntry;
 
 class ClubEventController extends Controller
 {
@@ -108,7 +109,7 @@ class ClubEventController extends Controller
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
             $guestlistattendancelist = $template->getGuestListAttendanceList->with('getEventID')->get();
-            $guestentry = $template->getGuestEntry->id;
+            $guestentry = $template->getGuestEntry->get();
         } else {
             // fill variables with no data if no template was chosen
             $activeTemplate = "";
@@ -244,10 +245,11 @@ class ClubEventController extends Controller
                                                             ->with('getEventID')
                                                             ->get();
         
-        $guestentry = GuestListAttendanceList::where('evnt_id', '=', $clubEvent->id)
+        $guestentry = GuestAttendanceEntry::where('list_id', '=', $clubEvent->id)
                                                 ->with( 'getGuestEntry',
-                                                        'getGuestListAttendanceList',
-                                                        'getEventID')
+                                                        'getGuestListAttendanceList'
+                                                        //'getEventID'
+                                                        )
                                                 ->get();
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)

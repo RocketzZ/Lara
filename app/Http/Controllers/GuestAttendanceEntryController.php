@@ -31,6 +31,7 @@ use Lara\Person;
 use Lara\Club;
 use Lara\Place;
 use Lara\GuestListAttendanceList;
+use Lara\GuestAttendanceEntry;
 
 class GuestAttendanceEntryController extends Controller
 {
@@ -118,21 +119,28 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        // Check if it's our form (CSRF protection)
-        if ( Session::token() !== Input::get( '_token' ) ) {
-            return response()->json('Fehler: die Session ist abgelaufen. Bitte aktualisiere die Seite und logge dich ggf. erneut ein.', 401);
-        }
+    public function update($id)
+    {   
+        $guestentry = GuestAttendanceEntry::where('id', '=', $id)->first();
 
-        Utilities::clearIcalCache();
+        //Get the Data
+        $id                 = $guestentry->get('id');
+        $name               = $guestentry->get('name');
+        $surname            = $guestentry->get('surname');
+        $comment            = $guestentry->get('comment');
+        $attendancestatus   = $guestentry->get('attendancestatus'); 
 
-         // If we only want to modify the item via management pages - do it without evaluating the rest
-        if ( !empty($request->get('id')) AND is_numeric($request->get('id')) ) {
-
-        // Find the corresponding entry object 
-        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $request->get('id'))->first();
+        //Find the Guestentry
         
+
+        $guestentry->name              = Input::get('name');
+        $guestentry->surname           = Input::get('surname');
+        $guestentry->comment           = Input::get('comment');
+        $guestentry->attendancestatus  = Input::get('attendancestatus');
+
+        $guestentry->save();
+
+        return redirect()->back(); 
     }
 
     /**
