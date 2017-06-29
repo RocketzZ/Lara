@@ -175,25 +175,25 @@ class GuestListAttendanceListController extends Controller
         $guestentry = new GuestListAttendanceList;
         $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)->get();
 
-        //$id                 = $guestlistattendancelist->get('id');
-        //$name               = $guestlistattendancelist->get('name');
-        //$surname            = $guestlistattendancelist->get('surname');
-        //$comment            = $guestlistattendancelist->get('comment');
-        //$attendancestatus   = $guestlistattendancelist->get('attendancestatus');
+        $id                 = $guestlistattendancelist->get('id');
+        $name               = $guestlistattendancelist->get('name');
+        $surname            = $guestlistattendancelist->get('surname');
+        $comment            = $guestlistattendancelist->get('comment');
+        $attendancestatus   = $guestlistattendancelist->get('attendancestatus');
          
-        $guestentry->name              = Input::get('name');
-        $guestentry->surname           = Input::get('surname');
-        $guestentry->comment           = Input::get('comment');
+        $guestlistattendancelist->name              = Input::get('name');
+        $guestlistattendancelist->surname           = Input::get('surname');
+        $guestlistattendancelist->comment           = Input::get('comment');
         //$guestentry->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
         
         //
         //
-        $guestentry = GuestListAttendanceList::where('id', '=', $id)
+        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)
                     ->where('id', $id)
-                    ->update(['name' => $guestentry->name],
-                             ['surname' => $guestentry->surname],
-                             ['comment' => $guestentry->comment]
+                    ->update(['name' => $guestlistattendancelist->name],
+                             ['surname' => $guestlistattendancelist->surname],
+                             ['comment' => $guestlistattendancelist->comment]
                              //['attendancestatus']
                             );
         //
@@ -213,7 +213,7 @@ class GuestListAttendanceListController extends Controller
         //], 200); 
 
         $guestentry->save();
-        return redirect()->back()->withInput();
+        return redirect()->back(); //->withInput();
     }
 
     /**
