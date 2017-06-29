@@ -181,20 +181,20 @@ class GuestListAttendanceListController extends Controller
         //$comment            = $guestlistattendancelist->get('comment');
         //$attendancestatus   = $guestlistattendancelist->get('attendancestatus');
          
-        $guestlistattendancelist->name              = Input::get('name');
-        $guestlistattendancelist->surname           = Input::get('surname');
-        $guestlistattendancelist->comment           = Input::get('comment');
-        $guestlistattendancelist->attendancestatus  = Input::get('attendancestatus');
+        $guestentry->name              = Input::get('name');
+        $guestentry->surname           = Input::get('surname');
+        $guestentry->comment           = Input::get('comment');
+        //$guestentry->attendancestatus  = Input::get('attendancestatus');
         //all the rest of the data is automated
         
         //
         //
-        $guestlistattendancelist = GuestListAttendanceList::where('id', '=', $id)
+        $guestentry = GuestListAttendanceList::where('id', '=', $id)
                     ->where('id', $id)
-                    ->update(['name' => $guestlistattendancelist->name],
-                             ['surname' => $guestlistattendancelist->surname],
-                             ['comment' => $guestlistattendancelist->comment]
-                             //['attendancestatus' => $guestlistattendancelist->attendancestatus]
+                    ->update(['name' => $guestentry->name],
+                             ['surname' => $guestentry->surname],
+                             ['comment' => $guestentry->comment]
+                             //['attendancestatus']
                             );
         //
         //
@@ -212,7 +212,7 @@ class GuestListAttendanceListController extends Controller
         //    "attendancestatus"  => $guestentry->attendancestatus 
         //], 200); 
 
-
+        $guestentry->save();
         return redirect()->back()->withInput();
     }
 

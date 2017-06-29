@@ -380,6 +380,7 @@ class ClubEventController extends Controller
         // save all data in the database
         $event->save();
         $schedule->save();
+        $list->save();
         foreach($entries as $entry)
             $entry->save();
         Utilities::clearIcalCache();
