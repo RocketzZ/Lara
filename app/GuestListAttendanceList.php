@@ -37,6 +37,10 @@ class GuestListAttendanceList extends Model
                                 ];
 
 //name functions correctly and get data
+public function getGuestEntry() {
+        return $this->hasMany('Lara\GuestAttendanceEntry', 'evnt_id', 'list_id');
+    }
+
 public function getUserID() {
 		return $this->belongsTo('Lara\Person', 'personid', 'id');
 	}
@@ -49,8 +53,8 @@ public function getGuestListAttendanceList() {
 		return $this->hasOne('Lara\GuestListAttendanceList', 'evnt_id', 'id');
 	}
 
-public function getGuestEntry() {
-		return $this->hasMany('Lara\GuestAttendanceEntry', 'list_id', 'id');
-	}
+//public function getGuestEntry() {
+//		return $this->hasMany('Lara\GuestAttendanceEntry', 'list_id', 'id');
+//	}
 
 }

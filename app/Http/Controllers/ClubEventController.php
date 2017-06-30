@@ -242,14 +242,13 @@ class ClubEventController extends Controller
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
        
         $guestlistattendancelist = GuestListAttendanceList::where('evnt_id', '=', $clubEvent->id)
-                                                            ->with('getEventID')
+                                                            //->with('getEventID')
                                                             ->get();
         
         $guestentry = GuestAttendanceEntry::where('list_id', '=', $clubEvent->id)
-                                                ->with( 'getGuestEntry',
-                                                        'getGuestListAttendanceList'
-                                                        //'getEventID'
-                                                        )
+                                                //->with( 'getGuestEntry',
+                                                //        'getGuestListAttendanceList'
+                                                //        )
                                                 ->get();
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)

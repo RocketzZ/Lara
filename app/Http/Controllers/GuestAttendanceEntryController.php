@@ -128,8 +128,8 @@ class GuestAttendanceEntryController extends Controller
         $name               = $guestentry->get('name');
         $surname            = $guestentry->get('surname');
         $comment            = $guestentry->get('comment');
-        $attendancestatus   = $guestentry->get('attendancestatus'); 
-
+        $attendancestatus   = $guestentry->get('attendancestatus');
+        
         //Find the Guestentry
         
 
@@ -138,6 +138,7 @@ class GuestAttendanceEntryController extends Controller
         $guestentry->comment           = Input::get('comment');
         $guestentry->attendancestatus  = Input::get('attendancestatus');
 
+        $guestentry = GuestAttendanceEntry::find($id);
         $guestentry->save();
 
         return redirect()->back(); 
