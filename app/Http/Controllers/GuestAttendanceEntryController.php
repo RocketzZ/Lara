@@ -121,7 +121,7 @@ class GuestAttendanceEntryController extends Controller
      */
     public function update($id)
     {   
-        $guestentry = GuestAttendanceEntry::where('id', '=', $id)->first();
+        $guestentry = GuestAttendanceEntry::where('id', '=', $id)->get();
 
         //Get the Data
         $id                 = $guestentry->get('id');
