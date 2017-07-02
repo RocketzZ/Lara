@@ -74,7 +74,8 @@ return [
     //Button
     'showMore'              => 'Mehr!',
     'showLess'              => 'Verschwinde!',
-    
+
+    'addMultipleGuests'     => 'Öffnet ein Luke, um mehrrere Matrosen auf einmal anzuheuerrrn',
     'Guestlist'             => 'Matrosenliste',
     'Attendancelist'        => 'Gefangenenliste',
     'Schedule'              => 'Meuterplan',

@@ -76,7 +76,9 @@ return [
     'showLess'              => 'show less',
 
     'hideTimes'             => 'Hide times',
-    
+
+
+    'addMultipleGuests'     => 'Opens a window, that allows you to add multiple Guests at once',
     'Guestlist'             => 'Guest List',
     'Attendancelist'        => 'Attendance List',
     'Schedule'              => 'Schedule',

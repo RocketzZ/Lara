@@ -106,7 +106,14 @@
 								value=""
 								placeholder="{{ trans('mainLang.addComment') }}"
 								/>
-					
+
+						<a href="{{ URL::route('event.edit', $clubEvent->id) }}"
+						   class="btn btn-success btn-xs "
+						   data-toggle="tooltip"
+						   data-placement="bottom"
+						   title="{{ trans('mainLang.addMultipleGuests') }}">
+							<i class="fa fa-window-restore"></i>
+						</a>
 					</div>
 				</div>
 				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden', )) !!}

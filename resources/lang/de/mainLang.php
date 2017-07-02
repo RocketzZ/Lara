@@ -63,9 +63,9 @@ return [
     'internEventP'          => 'Internes Event',        // Placeholder string for example used in monthCell.blade.php
     
     'willShowFor'           => 'wird angezeigt für',
-    
+
     'changeEvent'           => 'Veranstaltung ändern',
-    'seeAttendanceList'    =>  'Anwesenheitsliste anzeigen',
+    'seeAttendanceList'     =>  'Anwesenheitsliste anzeigen',
     'deleteEvent'           => 'Veranstaltung löschen',
     'confirmDeleteEvent'    => 'Diese Veranstaltung wirklich entfernen? Diese Aktion kann nicht rückgängig gemacht werden!',
     'createGuestAttendanceList'=>'Gäste/Anwesenheitsliste erstellen',
@@ -75,7 +75,9 @@ return [
     //Button
     'showMore'              => 'mehr anzeigen',
     'showLess'              => 'weniger anzeigen',
-    
+
+
+    'addMultipleGuests'     => 'Öffnet ein Fenster, um eine Liste von Gästen hinzu zu fügen',
     'Guestlist'             => 'Gästeliste',
     'Attendancelist'        => 'Anwesenheitsliste',
     'Schedule'              => 'Dienstplan',
