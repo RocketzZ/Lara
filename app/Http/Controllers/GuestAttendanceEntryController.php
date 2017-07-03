@@ -121,7 +121,7 @@ class GuestAttendanceEntryController extends Controller
         $guestentry->surname           = Input::get('surname' . $guestentry->id);
         $guestentry->comment           = Input::get('comment' . $guestentry->id);
 
-        $guestentry->save(array('name', 'surname', 'comment'));
+        $guestentry->save();
 
         return redirect()->back();
         // Called as part of GuestListAttendanceList CREATE
@@ -200,7 +200,7 @@ class GuestAttendanceEntryController extends Controller
         $guestentry->comment           = Input::get('comment' . $guestentry->id);
         $guestentry->attendancestatus  = Input::get('attendancestatus' . $guestentry->id);
 
-        $guestentry->save(array('name', 'surname', 'comment', 'attendancestatus'));
+        $guestentry->save();
         }
         //$guestentry = new GuestAttendanceEntry;
         
