@@ -20,7 +20,7 @@ class GuestAttendanceEntry extends Model
      *
      * @var array
      */
-     protected $fillable = [    'name',
+     protected $fillable = array(    'name',
                                 'surname',
                                 'status',
                                 'comment',
@@ -32,7 +32,7 @@ class GuestAttendanceEntry extends Model
                                                     //4->added via facebook import
                                 'attendancestatus',
                                 'list_id',
-                                ];
+     );
 
 //name functions correctly and get data
 public function getGuestEntry() {

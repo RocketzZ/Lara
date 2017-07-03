@@ -18,8 +18,9 @@ use Input;
 use Config;
 use Log;
 use Redirect;
-
+use Illuminate\Database\Eloquent\Collection;
 use Hash;
+
 
 use Carbon\Carbon;
 
@@ -51,8 +52,58 @@ class GuestAttendanceEntryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($templateId = null)
     {
+        if ( is_null($templateId) ) {
+            $templateId = 0;    // 0 = no template
+        }
+
+        
+        // if a template id was provided, load the schedule needed and extract job types
+        if ( $templateId != 0 ) {
+            $template = Schedule::where('id', '=', $templateId)
+                                ->first();
+
+            // put name of the active template for further use
+            $activeTemplate = $template->guest_attendance_list;
+            
+            //get template
+            $guestentry    = $template->getGuestEntry()->get();
+            //$personidclub               = $template->getGuestListAttendanceList->personidclub;
+            //$personid                   = $template->getGuestListAttendanceList->personid;
+            $name                       = $template->getGuestEntry->name;
+            $surname                    = $template->getGuestEntry->surname;
+            $status                     = $template->getGuestEntry->status;
+            $comment                    = $template->getGuestEntry->comment;
+            //$importsource               = $template->getGuestListAttendanceList->importsource;    //?
+            $attendancestatus           = $template->getGuestEntry->attendancestatus;
+            $evnt_id                    = $template->getGuestEntry->evnt_id;
+            $list_id                    = $template->getGuestEntry->list_id;
+            //$guestentry                 = $template->getGuestEntry->id;
+            //$eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
+
+        } else {
+            // fill variables with no data if no template was chosen, but not sure if needed here
+            $activeTemplate = "";
+            $guestentry    = null;
+            //$personidclub               = null;
+            //$personid                   = null;
+            $name                       = null;
+            $surname                    = null;
+            $status                     = null;
+            $comment                    = null;
+            //$importsource               = null;
+            $attendancestatus           = null;
+            $evnt_id                    = null;
+            $list_id                    = null;
+            //$guestentry                 = null;
+            //$eventid            = null;      //maybe get eventid from event page
+        }
+                
+        //return values for creating new table entry
+        return $guestentry;
+        //redirect()->back()->withErrors(compact('guestentry', 'name', 'surname', 'comment', 'attendancestatus', 'id', 'list_id'));
+        
         // Not needed because guestattendancelist are created only as part of a event pair. 
         // Restricted via routes exception.
     }
@@ -63,8 +114,16 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    private static function store($id)
     {
+        $guestentry->name              = Input::get('name' . $guestentry->id);
+        $guestentry->surname           = Input::get('surname' . $guestentry->id);
+        $guestentry->comment           = Input::get('comment' . $guestentry->id);
+        $guestentry->attendancestatus  = Input::get('attendancestatus' . $guestentry->id);
+
+        $guestentry->save();
+
+        return Redirect::route('event.show', array('id' => $guestentry->list_id));
         // Called as part of GuestListAttendanceList CREATE
         // IMPLEMENT LATER
     }
@@ -121,27 +180,37 @@ class GuestAttendanceEntryController extends Controller
      */
     public function update($id)
     {   
-        $guestentry = GuestAttendanceEntry::where('id', '=', $id)->get();
+        
+        $guestentry = GuestAttendanceEntry::where('id', '=', $id)->findOrFail($id);
 
         //Get the Data
-        $id                 = $guestentry->get('id');
-        $name               = $guestentry->get('name');
-        $surname            = $guestentry->get('surname');
-        $comment            = $guestentry->get('comment');
-        $attendancestatus   = $guestentry->get('attendancestatus');
+
+        if ($id != 0){
+        $id                 = $guestentry->find('id');
+        $name               = $guestentry->find('name');
+        $surname            = $guestentry->find('surname');
+        $comment            = $guestentry->find('comment');
+        $attendancestatus   = $guestentry->find('attendancestatus');
+        
         
         //Find the Guestentry
         
-
-        $guestentry->name              = Input::get('name');
+        $guestentry->name              = "test232";
         $guestentry->surname           = Input::get('surname');
         $guestentry->comment           = Input::get('comment');
         $guestentry->attendancestatus  = Input::get('attendancestatus');
 
-        $guestentry = GuestAttendanceEntry::find($id);
-        $guestentry->save();
+        $guestentry->save(array('name', 'surname', 'comment', 'attendancestatus'));
+        }
+        //$guestentry = new GuestAttendanceEntry;
+        
+        //$guestentry = GuestAttendanceEntryController::store($id, $guestentry);
+        //$guestentry = GuestAttendanceEntry::find($id);
+        //$guestentry->id = ++$id;
+        //$guestentry->save();
 
-        return redirect()->back(); 
+        return redirect()->back();
+        //Redirect::route('guestentry.store', array('id' => $guestentry->id))->withInput(); 
     }
 
     /**

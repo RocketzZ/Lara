@@ -75,41 +75,40 @@
 
 		{{--Add one empty Field at the End--}}
 
-			<span hidden>{{$counter = $guestlistattendancelist}}</span>
 
-			{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $guestentry]]) !!}
+			{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $guestentry->id]]) !!}
 			
 				<div id="container" class="container">
 				
-					<div id={{ "box" . ++$counter }} class="box">
+					<div id={{ "box" . ++$guestentry->id}} class="box">
 					
 						<input 	type="text"
-								name={{ "name" . $counter }}
+								name={{ "name" . $guestentry->id}}
 								class="input"
-								id={{ "name" . $counter }}
-								value=""
+								id={{ "name" . $guestentry->id}}
+								
 								placeholder="{{ trans('mainLang.firstname') }}"
 								required />
 
 						<input 	type="text"
-								name={{ "surname" . $counter }}
+								name={{ "surname" . $guestentry->id}}
 								class="input"
-								id={{ "surname" . $counter }}
-								value=""
+								id={{ "surname" . $guestentry->id}}
+							
 								placeholder="{{ trans('mainLang.surname') }}"
 								required />
 
 						<input 	type="text"
-								name={{ "comment" . $counter }}
+								name={{ "comment" . $guestentry->id}}
 								class="input"
-								id={{ "comment" . $counter }}
-								value=""
+								id={{ "comment" . $guestentry->id}}
+								
 								placeholder="{{ trans('mainLang.addComment') }}"
 								/>
 					
 					</div>
 				</div>
-				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden', )) !!}
+				{!! Form::submit('save', ['id'=>'btn-submit-changes' . $guestentry->id, 'hidden']) !!}
 			{!! Form::close() !!}
 		</div>
 	</div>

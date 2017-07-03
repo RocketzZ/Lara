@@ -160,6 +160,8 @@ class ClubEventController extends Controller
 
         $guestlistattendancelist = (new GuestListAttendanceListController)->create(null);
         $guestlistattendancelist->evnt_id = $newEvent->id;
+
+        $guestentry = (new GuestAttendanceEntryController)->create(null);
         
 
         $newSchedule = (new ScheduleController)->update(null);
@@ -294,7 +296,7 @@ class ClubEventController extends Controller
 
 
 
-        return View::make('clubEventView', compact('guestentry', 'guestlistattendancelist', 'clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'guestlistattendancelist', 'guestentry'));
+        return View::make('clubEventView', compact('id', 'guestentry', 'guestlistattendancelist', 'clubEvent', 'entries', 'clubs', 'persons', 'revisions', 'created_by', 'creator_name', 'guestlistattendancelist', 'guestentry'));
     }
 
 

@@ -18,7 +18,7 @@ use Input;
 use Config;
 use Log;
 use Redirect;
-
+use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
 
 use Lara\ClubEvent;
@@ -103,7 +103,7 @@ class GuestListAttendanceListController extends Controller
         }
                 
         //return values for creating new table entry
-        return redirect()->back()->withErrors(compact('guestentry', 'guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus'));
+        return redirect()->back()->withErrors(compact('guestentry', 'guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus', 'id'));
         
                //View::make('createGuestAttendanceList', compact('personidclub','personid','name','surname',
                //                                                'status','comment','importsource',
