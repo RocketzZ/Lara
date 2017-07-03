@@ -74,42 +74,57 @@
 			@endforeach
 
 		{{--Add one empty Field at the End--}}
-
-
-			{!! Form::open(['method' => 'PUT', 'route' => ['guestentry.update', $guestentry->id]]) !!}
 			
-				<div id="container" class="container">
-				
-					<div id={{ "box" . ++$guestentry->id}} class="box">
-					
-						<input 	type="text"
-								name={{ "name" . $guestentry->id}}
-								class="input"
-								id={{ "name" . $guestentry->id}}
-								
-								placeholder="{{ trans('mainLang.firstname') }}"
-								required />
+			{!! Form::open( array('method' => 'POST',
+		   						  'route' => ['guestentry.store', $guestentry],
+								  'id' => $guestentry,
+								  'class' => 'GuestAttendanceEntry'))
+			!!}
+			
+			{{-- Firstname and Surname --}}
 
-						<input 	type="text"
-								name={{ "surname" . $guestentry->id}}
-								class="input"
-								id={{ "surname" . $guestentry->id}}
-							
-								placeholder="{{ trans('mainLang.surname') }}"
-								required />
-
-						<input 	type="text"
-								name={{ "comment" . $guestentry->id}}
-								class="input"
-								id={{ "comment" . $guestentry->id}}
-								
-								placeholder="{{ trans('mainLang.addComment') }}"
-								/>
-					
-					</div>
+				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
+					{!! Form::text(	'name' . $guestentry,
+									Input::flash('name' . $guestentry),
+									array(	'placeholder'=>Lang::get('mainLang.firstname'),
+											'id'=>'name' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
 				</div>
-				{!! Form::submit('save', ['id'=>'btn-submit-changes' . $guestentry->id, 'hidden']) !!}
+				&nbsp;&nbsp;
+
+				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
+					{!! Form::text(	'surname' . $guestentry,
+									Input::flash('surname' . $guestentry),
+									array(	'placeholder'=>Lang::get('mainLang.surname'),
+											'id'=>'surname' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+				</div>
+
+				&nbsp;&nbsp;
+
+			{{--Comment Section --}}
+
+				<div class="col-md-6 col-sm-12 col-xs-12 no-margin">
+					
+					{!! Form::text(	'comment' . $guestentry,
+									Input::flash('comment' . $guestentry),
+									array(	'placeholder'=>Lang::get('mainLang.addComment'),
+											'id'=>'comment' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+			
+				</div>
+
+			
+			{{--Allow Everyone to create Guestentries--}}
+
+				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden')) !!}
+
 			{!! Form::close() !!}
+
+			
 		</div>
 	</div>
 </div>

@@ -114,16 +114,16 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    private static function store($id)
+    public function store()
     {
+        $guestentry = new GuestAttendanceEntry;
         $guestentry->name              = Input::get('name' . $guestentry->id);
         $guestentry->surname           = Input::get('surname' . $guestentry->id);
         $guestentry->comment           = Input::get('comment' . $guestentry->id);
-        $guestentry->attendancestatus  = Input::get('attendancestatus' . $guestentry->id);
 
-        $guestentry->save();
+        $guestentry->save(array('name', 'surname', 'comment'));
 
-        return Redirect::route('event.show', array('id' => $guestentry->list_id));
+        return redirect()->back();
         // Called as part of GuestListAttendanceList CREATE
         // IMPLEMENT LATER
     }
@@ -195,10 +195,10 @@ class GuestAttendanceEntryController extends Controller
         
         //Find the Guestentry
         
-        $guestentry->name              = "test232";
-        $guestentry->surname           = Input::get('surname');
-        $guestentry->comment           = Input::get('comment');
-        $guestentry->attendancestatus  = Input::get('attendancestatus');
+        $guestentry->name              = Input::get('name' . $guestentry->id);
+        $guestentry->surname           = Input::get('surname' . $guestentry->id);
+        $guestentry->comment           = Input::get('comment' . $guestentry->id);
+        $guestentry->attendancestatus  = Input::get('attendancestatus' . $guestentry->id);
 
         $guestentry->save(array('name', 'surname', 'comment', 'attendancestatus'));
         }
