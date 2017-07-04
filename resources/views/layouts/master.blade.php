@@ -41,21 +41,7 @@
         @yield('content')
     </section>
 
-    <br>
- 	<footer class="navbar-default navbar-static-bottom" id="footer">
-        <div class="container">
-            <br>
-            <span class="col-xs-12 col-sm-12 col-md-4 text-dark-grey" style="text-align: center;">
-                <small><a href="mailto:maxim.drachinskiy@bc-studentenclub.de"> {{ trans('mainLang.notWorkingMail',['Name' => 'Maxim']) }} </a></small>
-            </span>
-            <span class="col-xs-12 col-sm-12 col-md-4 text-dark-grey" style="text-align: center;">
-                @if(File::exists("gitrevision.txt"))
-                    <small>{{File::get("gitrevision.txt")}}</small>
-                @else
-                    <small>&nbsp;</small>
-                @endif
-            </span>
-            <span class="col-xs-12 col-sm-12 col-md-4 text-dark-grey" style="text-align: center;">
+
                 <small><a href="https://github.com/ILSCeV/Lara">{{ trans('mainLang.moreInfosProjectsite') }}</a>.
                 </small>
             </span>

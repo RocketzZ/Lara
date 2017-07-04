@@ -108,6 +108,7 @@
 								/>
 
 						<a href="{{ URL::route('event.edit', $clubEvent->id) }}"
+						   target="_blank"
 						   class="btn btn-success btn-xs "
 						   data-toggle="tooltip"
 						   data-placement="bottom"
