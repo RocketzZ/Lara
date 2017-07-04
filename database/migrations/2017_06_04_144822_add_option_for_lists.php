@@ -15,10 +15,10 @@ class AddOptionForLists extends Migration
     {
         //adds the function to specify if guest list or attendance list or none
         Schema::table('club_events', function (Blueprint $table) {
-            $table->boolean('guestlistattendancelistevent')->nullable()->default(NULL)->after('evnt_is_private');
+            $table->boolean('guestlistattendancelist')->nullable()->default(NULL)->after('evnt_is_private');
             //can be NULL 
-            //true 	->guest list wanted
-			//false ->attendance list wanted
+            //0 	->guest list wanted
+			//1     ->attendance list wanted
 			//NULL 	->neither wanted
         });
     }
@@ -30,7 +30,7 @@ class AddOptionForLists extends Migration
     public function down()
     {
         Schema::table('club_events', function (Blueprint $table) {
-             $table->dropColumn('guestlistattendancelistevent');
+             $table->dropColumn('guestlistattendancelist');
         }); 
     }
 }

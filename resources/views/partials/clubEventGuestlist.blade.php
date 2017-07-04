@@ -1,4 +1,4 @@
-{{--@if($guestlistattendancelist->evnt_id != '')--}}
+@if($clubEvent->guestlistattendancelist == '0')
 
 <div class="panel panel-warning">
 
@@ -128,6 +128,6 @@
 		</div>
 	</div>
 </div>
-{{--@else
-Nothing.
-@endif--}}
+@else
+{{--code here--}}
+@endif

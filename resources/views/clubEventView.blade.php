@@ -215,8 +215,16 @@
 	<div class="container">
 		<ul class="nav nav-tabs">
   			<li class="active"><a href="#schedule" data-toggle="tab" aria-expanded="true">{{ trans('mainLang.Schedule') }}</a></li>
-  			<li class=""><a href="#guestlist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Guestlist') }}</a></li>
+
+  			{{--add if to hide links if list not needed--}}
+			@if($clubEvent->guestlistattendancelist == '0')
+			<li class=""><a href="#guestlist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Guestlist') }}</a></li> 
+			@endif
+
+			@if($clubEvent->guestlistattendancelist == '1')
 			<li class=""><a href="#attendancelist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Attendancelist') }}</a></li>
+			@endif
+
 		</ul>
 
 		<div class="tab-content">
@@ -224,13 +232,19 @@
    				@include("partials.clubEventSchedule")
   			</div>
 
-  			<div class="tab-pane" id="guestlist">
+			  {{--add if to hide list if list not needed--}}
+			  @if($clubEvent->guestlistattendancelist == '0')
+			  <div class="tab-pane" id="guestlist">
     			@include("partials.clubEventGuestlist")
   			</div>
+			  @endif
 
+			  @if($clubEvent->guestlistattendancelist == '1')
 			  <div class="tab-pane " id="attendancelist">
     			@include("partials.clubEventAttendancelist")
   			</div>
+			  @endif
+
 		</div>
 	</div>
 
