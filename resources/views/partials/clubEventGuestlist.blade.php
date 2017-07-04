@@ -63,9 +63,11 @@
 									'0', false)
 				!!} 
 			
-			{{--Only allow logged in Members to change Guestentries--}}
+			{{--Only allow logged in Members to change Guestentries, allow everyone to add new--}}
 
-				@if (Session::has("userName"))
+				@if (Session::has("userName") && $guestentry->name !== null)
+					{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden')) !!}
+				@elseif ($guestentry->name == null)
 					{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden')) !!}
 				@endif
 
