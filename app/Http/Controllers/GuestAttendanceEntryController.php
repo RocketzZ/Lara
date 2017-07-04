@@ -114,17 +114,11 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {   
+    public function store($id)
+    {         
         $guestentry = new GuestAttendanceEntry;
-        
-        $guestentry->name              = Input::get('name' . $guestentry->id);
-        $guestentry->surname           = Input::get('surname' . $guestentry->id);
-        $guestentry->comment           = Input::get('comment' . $guestentry->id);
 
-        $guestentry->save();
-
-        return redirect()->back();
+        return $guestentry;
         // Called as part of GuestListAttendanceList CREATE
         // IMPLEMENT LATER
     }
@@ -166,10 +160,14 @@ class GuestAttendanceEntryController extends Controller
      * @param  \Lara\GuestListAttendanceList  $guestListAttendanceList
      * @return \Illuminate\Http\Response
      */
-    public function edit(GuestListAttendanceList $id)
+    public function edit($id)
     {
-        // Called as part of guestattendancelist CREATE
-        // IMPLEMENT LATER
+        $guestentry = GuestAttendanceEntry::where('id', '=', $id)->findOrFail($id);
+        $newGuestentry = GuestAttendanceEntryController::store(null);
+        $newGuestentry->list_id = $guestentry->list_id;
+        $newGuestentry->save();
+
+        return redirect()->back();            
     }
 
     /**
@@ -203,15 +201,13 @@ class GuestAttendanceEntryController extends Controller
 
         $guestentry->save();
         }
-        //$guestentry = new GuestAttendanceEntry;
         
-        //$guestentry = GuestAttendanceEntryController::store($id, $guestentry);
-        //$guestentry = GuestAttendanceEntry::find($id);
-        //$guestentry->id = ++$id;
-        //$guestentry->save();
-
+        $newGuestentry = GuestAttendanceEntryController::store(null);
+        $newGuestentry->list_id = $guestentry->list_id;
+        $newGuestentry->save();
+        
         return redirect()->back();
-        //Redirect::route('guestentry.store', array('id' => $guestentry->id))->withInput(); 
+         
     }
 
     /**
