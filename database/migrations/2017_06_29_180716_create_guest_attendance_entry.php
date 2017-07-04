@@ -25,7 +25,7 @@ class CreateGuestAttendanceEntry extends Migration
             $table->string('comment', 250)->nullable()->default(NULL);                                             //comment field
             $table->tinyInteger('importsource')->nullable()->default(NULL);                                        //manually added or facebook...
             $table->tinyInteger('attendancestatus')->nullable()->default(NULL);                                    //is attening/not attending/apologized... 
-            $table->integer('list_id')->references('id')->on('guest_attendance_list');                             //event id for guest list
+            $table->integer('list_id')->references('evnt_id')->on('guest_attendance_list');                             //event id for guest list
         });
     }
 
