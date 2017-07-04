@@ -1,4 +1,4 @@
-@if($clubEvent->guestlistattendancelist == '0')
+@if($clubEvent->guestlistattendancelist == '1' && $clubEvent->evnt_type != 4)
 
 <div class="panel panel-warning">
 

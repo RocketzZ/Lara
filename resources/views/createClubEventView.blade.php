@@ -243,7 +243,7 @@
 				<div class="form-group col-md-12 col-sm-12 col-xs-12 no-padding">
 					<div class="col-md-10 col-sm-10 col-xs-12">
 					<label for="guestlistattendancelist">{{ trans('mainLang.createGuestAttendanceList') }}: &nbsp;</label>
-					{!! Form::checkbox('guestlistattendancelist', '1', true) !!}
+					{!! Form::checkbox('guestlistattendancelist', '1', false) !!}
 					</div>
 				</div>
 

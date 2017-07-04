@@ -217,11 +217,11 @@
   			<li class="active"><a href="#schedule" data-toggle="tab" aria-expanded="true">{{ trans('mainLang.Schedule') }}</a></li>
 
   			{{--add if to hide links if list not needed--}}
-			@if($clubEvent->guestlistattendancelist == '0')
+			@if($clubEvent->guestlistattendancelist == '1' && $clubEvent->evnt_type != 4)
 			<li class=""><a href="#guestlist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Guestlist') }}</a></li> 
 			@endif
 
-			@if($clubEvent->guestlistattendancelist == '1')
+			@if($clubEvent->guestlistattendancelist == '1' && $clubEvent->evnt_type == 4)
 			<li class=""><a href="#attendancelist" data-toggle="tab" aria-expanded="false">{{ trans('mainLang.Attendancelist') }}</a></li>
 			@endif
 
@@ -233,13 +233,13 @@
   			</div>
 
 			  {{--add if to hide list if list not needed--}}
-			  @if($clubEvent->guestlistattendancelist == '0')
+			  @if($clubEvent->guestlistattendancelist == '1'  && $clubEvent->evnt_type != 4)
 			  <div class="tab-pane" id="guestlist">
     			@include("partials.clubEventGuestlist")
   			</div>
 			  @endif
 
-			  @if($clubEvent->guestlistattendancelist == '1')
+			  @if($clubEvent->guestlistattendancelist == '1' && $clubEvent->evnt_type == 4)
 			  <div class="tab-pane " id="attendancelist">
     			@include("partials.clubEventAttendancelist")
   			</div>
