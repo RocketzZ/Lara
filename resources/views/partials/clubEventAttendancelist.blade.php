@@ -1,227 +1,154 @@
-<div class="panel">
-	<div class="panel-heading">
-	<h4 class="panel-title">{{ trans('mainLang.editAttendanceList') }}:</h4>
-	</div>
-	
-	<div class="panel-body no-padding" id="main">
-
-	{{-- jobtype fields --}}
-	    <span hidden>{{$counter = 0}}</span>
+	<script>
+var checkbox = document.getElementById(	'attendancestatus' . $guestentry);
+checkbox.indeterminate = true;
+</script>
 
 
-<div class="container ">
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-&nbsp;&nbsp;
-<div class="btn-group">
-    <button type="button" class="btn btn-primary">{{ trans('mainLang.sort') }}</button>
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="#">{{ trans('mainLang.sortByName') }}</a></li>
-      <li><a href="#">{{ trans('mainLang.sortByClub') }}</a></li>
-	  <li><a href="#">{{ trans('mainLang.sortByAttendancestatus') }}</a></li>
-      
-    </ul>
-  </div>
-             <style>
-			 #myInput {
-  background-image: url('\Lara\public\1496511668_icon-111-search.png');
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 60%;
-  font-size: 14px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-			 </style>
 
+
+
+{{--@if($guestlistattendancelist->evnt_id != '')--}}
+
+<div class="panel panel-warning">
+
+	<div class="panel-body no-padding">
+
+		<div class="row paddingTop">
+
+		{{-- Show all Guestentries --}}
+
+			@foreach($guestentry as $guestentry)
+		
+			{!! Form::open( array('method' => 'PUT',
+		   						  'route' => ['guestentry.update', $guestentry->id],
+								  'id' => $guestentry->id,
+								  'class' => 'GuestAttendanceEntry'))
+			!!}
+			
+			{{-- Firstname and Surname --}}
+
+				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
+					{!! Form::text(	'name' . $guestentry->id,
+									$guestentry->name,
+									array(	'placeholder'=>Lang::get('mainLang.firstname'),
+											'id'=>'name' . $guestentry->id,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+				</div>
+				&nbsp;&nbsp;
+
+				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
+					{!! Form::text(	'surname' . $guestentry->id,
+									$guestentry->surname,
+									array(	'placeholder'=>Lang::get('mainLang.surname'),
+											'id'=>'surname' . $guestentry->id,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+				</div>
+
+				&nbsp;&nbsp;
+
+
+				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
+				<label for="attendancestatus">{{ trans('mainLang.Attendancestatus') }}</label>
+				
+				{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
+									$guestentry->attendancestatus,
+									'0', false)
+				!!} 
 </div>
+&nbsp;&nbsp;
+			{{--Comment Section --}}
 
+				<div class="col-md-6 col-sm-6 col-xs-12 no-margin">
+					<span class="pull-left">
+						{!! $guestentry->comment == "" ? '<i class="fa fa-comment-o"></i>' : '<i class="fa fa-comment"></i>' !!}
+						&nbsp;&nbsp;
+					</span>
 
+					{!! Form::text(	'comment' . $guestentry->id,
+									$guestentry->comment,
+									array(	'placeholder'=>Lang::get('mainLang.addComment'),
+											'id'=>'comment' . $guestentry->id,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+			
+				</div>
 
-
-	    <div id="container" class="container">
-		    {{-- If there are entries passed - fill them with data and increment counter --}} 
-
-		    @if(isset($entries))
-		        @foreach($entries as $entry)
-		            <div id={{ "box" . ++$counter }} class="box">
-			           	
-				           	<input type="text" 
-				           		   name={{ "person_name" . $counter }}
-				           		   class="input" 
-				           		   id={{ "person_name" . $counter }}
-				           		   value=""
-				           		   placeholder="{{ trans('mainLang.name') }}"/>
-				           	
-				           	
-
-						
-						&nbsp;&nbsp;&nbsp;&nbsp;
-
-						<input type="text" 
-				           		   name={{ "club_name" . $counter }}
-				           		   class="input" 
-				           		   id={{ "club_name" . $counter }}
-				           		   value=""
-				           		   placeholder="{{ trans('mainLang.club') }}"/>
-
-
-{{--  CHECKBOX  --}}
-&nbsp;&nbsp;&nbsp;&nbsp;
-          	<label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description"></span>
-                        </label>
-
-
-
-		            	&nbsp;&nbsp;&nbsp;&nbsp;
-		            	<input type="text" 
-		            		   class="input" 
-		            		   name={{ "addComment" . $counter }} 
-		            		   id={{ "addComment" . $counter }}
-		            		   value=""
-							   placeholder="{{ trans('mainLang.addComment') }}" />
-							   
-
-		            	
-		            	<input type="button" value="+" class="btn btn-small btn-success btnAdd" />
-		            	&nbsp;&nbsp;
-	    				<input type="button" value="&#8211;" class="btn btn-small btn-danger btnRemove" />
-					</div>
-					
 				
 			
-		        @endforeach 
-		    @endif
+			{{--Only allow logged in Members to change Guestentries--}}
 
+				@if (Session::has("userName"))
+					{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden')) !!}
+				@endif
 
+			{!! Form::close() !!}
 
+			@endforeach
 
+		{{--Add one empty Field at the End--}}
+			
+			{!! Form::open( array('method' => 'POST',
+		   						  'route' => ['guestentry.store', $guestentry],
+								  'id' => $guestentry,
+								  'class' => 'GuestAttendanceEntry'))
+			!!}
+			
+			{{-- Firstname and Surname --}}
 
+				<div class="col-md-3 col-sm-3 col-xs-3 no-padding">
+					{!! Form::text(	'name' . $guestentry,
+									Input::flash('name' . $guestentry),
+									array(	'placeholder'=>Lang::get('mainLang.firstname'),
+											'id'=>'name' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+				</div>
+				&nbsp;&nbsp;
 
+				<div class="col-md-3 col-sm-3 col-xs-3 no-padding">
+					{!! Form::text(	'surname' . $guestentry,
+									Input::flash('surname' . $guestentry),
+									array(	'placeholder'=>Lang::get('mainLang.surname'),
+											'id'=>'surname' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+				</div>
 
+				&nbsp;&nbsp;
+<div class="col-md-1 col-sm-1 col-xs-3 no-padding">
+					{!! Form::checkbox(	'attendancestatus' . $guestentry,
+									Input::flash('attendancestatus' . $guestentry),
 
+									array(	'id'=>'attendancestatus' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 
+										
+					!!}
+				</div>
+				&nbsp;&nbsp;
+			{{--Comment Section --}}
 
-
-
-		    {{-- and add one empty entry --}}
-		       <div id={{ "box" . ++$counter }} class="box">
-			           	
-				           	<input type="text" 
-				           		   name={{ "person_name" . $counter }}
-				           		   class="input" 
-				           		   id={{ "person_name" . $counter }}
-				           		   value=""
-				           		   placeholder="{{ trans('mainLang.name') }}"/>
-				           	
-				           	
-
+				<div class="col-md-4 col-sm-6 col-xs-12 no-margin">
 					
+					{!! Form::text(	'comment' . $guestentry,
+									Input::flash('comment' . $guestentry),
+									array(	'placeholder'=>Lang::get('mainLang.addComment'),
+											'id'=>'comment' . $guestentry,
+											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
+					!!}
+			
+				</div>
 
-				&nbsp;&nbsp;&nbsp;&nbsp;
-				
+			
+			{{--Allow Everyone to create Guestentries--}}
 
-					<input type="text" 
-				           		   name={{ "club_name" . $counter }}
-				           		   class="input" 
-				           		   id={{ "club_name" . $counter }}
-				           		   value=""
-				           		   placeholder="{{ trans('mainLang.club') }}"/>
+				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden')) !!}
 
+			{!! Form::close() !!}
 
-				&nbsp;&nbsp;&nbsp;&nbsp;
-	        	<label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description"></span>
-                        </label> 
-
-         	&nbsp;&nbsp;&nbsp;&nbsp;
-		            	<input type="text" 
-		            		   class="input" 
-		            		   name={{ "addComment" . $counter }} 
-		            		   id={{ "addComment" . $counter }}
-		            		   value=""
-							   placeholder="{{ trans('mainLang.addComment') }}" />    
-							             
-
-
-
-	        	<input type="button" value="+" class="btn btn-small btn-success btnAdd" /> 
-	        	&nbsp;&nbsp;
-				<input type="button" value="&#8211;" class="btn btn-small btn-danger btnRemove" />
-
-
-				
-	    	</div>
-	    	<br>
-			<input type="hidden" name="counter" id="counter" value="{{$counter}}" />
+			
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{--
-
-
-			<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-
-             <style>
-			 #myInput {
-  background-image: url('/css/searchicon.png');
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 60%;
-  font-size: 14px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
-			 </style>
-
-
-
-<script>
-function myFunction() {
-    var myInput, filter, ul, li, a, i;
-    myInput = document.getElementById("container");
-    filter = myInput.value.toUpperCase();
-    input = document.getElementById("person_name" . $counter);
-   
-    for (i = 0; i < $counter; i++) {
-        a = input[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            input[i].style.display = "";
-        } else {
-           input[i].style.display = "none";
-
-        }
-    }
-}
-</script>
-
-     
-
---}}
