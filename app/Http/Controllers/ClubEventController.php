@@ -158,11 +158,9 @@ class ClubEventController extends Controller
         $newEvent = $this->editClubEvent(null);
         $newEvent->save();
 
-        $guestlistattendancelist = (new GuestListAttendanceListController)->create(null);
-        $guestlistattendancelist->evnt_id = $newEvent->id;
-
-        $guestentry = (new GuestAttendanceEntryController)->create(null);
-        
+        $guestlistattendancelist = (new GuestListAttendanceListController)->update(null);
+        $guestlistattendancelist->evnt_id = $newEvent->id;        
+        $guestlistattendancelist->save();
 
         $newSchedule = (new ScheduleController)->update(null);
         $newSchedule->evnt_id = $newEvent->id;
@@ -243,14 +241,13 @@ class ClubEventController extends Controller
 
         $schedule = Schedule::findOrFail($clubEvent->getSchedule->id);
        
-        $guestlistattendancelist = GuestListAttendanceList::where('evnt_id', '=', $clubEvent->id)
-                                                            //->with('getEventID')
-                                                            ->get();
+        $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->id);
         
-        $guestentry = GuestAttendanceEntry::where('list_id', '=', $clubEvent->id)
-                                                //->with( 'getGuestEntry',
-                                                //        'getGuestListAttendanceList'
-                                                //        )
+        $guestentry = GuestAttendanceEntry::where('list_id', '=', $guestlistattendancelist->evnt_id)
+                                                ->with( 'getGuestEntry',
+                                                        'getGuestListAttendanceList',
+                                                        'getEventID'
+                                                        )
                                                 ->get();
 
         $entries = ScheduleEntry::where('schdl_id', '=', $schedule->id)

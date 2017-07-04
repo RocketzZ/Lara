@@ -103,7 +103,7 @@ class GuestListAttendanceListController extends Controller
         }
                 
         //return values for creating new table entry
-        return redirect()->back()->withErrors(compact('guestentry', 'guestlistattendancelist', 'name', 'surname', 'comment', 'attendancestatus', 'id'));
+        return $guestlistattendancelist;
         
                //View::make('createGuestAttendanceList', compact('personidclub','personid','name','surname',
                //                                                'status','comment','importsource',
@@ -190,7 +190,7 @@ class GuestListAttendanceListController extends Controller
         
         
         //here could be the ajax server stuff, but not sure ask patche if possible        
-        $guestlistattendancelist->save();
+        
         
         
         return $guestlistattendancelist; 
