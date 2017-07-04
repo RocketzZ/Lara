@@ -77,7 +77,7 @@ class GuestAttendanceEntryController extends Controller
             $comment                    = $template->getGuestEntry->comment;
             //$importsource               = $template->getGuestListAttendanceList->importsource;    //?
             $attendancestatus           = $template->getGuestEntry->attendancestatus;
-            $evnt_id                    = $template->getGuestEntry->evnt_id;
+            //$evnt_id                    = $template->getGuestEntry->evnt_id;
             $list_id                    = $template->getGuestEntry->list_id;
             //$guestentry                 = $template->getGuestEntry->id;
             //$eventid            = $template->getGuestListAttendanceList->eventid;           //get it from event page
@@ -115,11 +115,14 @@ class GuestAttendanceEntryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store()
-    {
+    {   
+        $guestlistattendancelist = GuestListAttendanceList::where('id','=','evnt_id')->get();
         $guestentry = new GuestAttendanceEntry;
-        $guestentry->name              = Input::get('name' . $guestentry->id);
-        $guestentry->surname           = Input::get('surname' . $guestentry->id);
-        $guestentry->comment           = Input::get('comment' . $guestentry->id);
+        
+        $guestentry->list_id           = $guestlistattendancelist->evnt_id;
+        $guestentry->name              = Input::get('name' . $guestentry);
+        $guestentry->surname           = Input::get('surname' . $guestentry);
+        $guestentry->comment           = Input::get('comment' . $guestentry);
 
         $guestentry->save();
 
