@@ -57,12 +57,33 @@
 				</div>
 
 				<label for="attendancestatus">{{ trans('mainLang.Attendancestatus') }}</label>
+
+				@if (Session::has("userName"))
+					@if ($guestentry->attendancestatus !== null)
+					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
+										$guestentry->attendancestatus,
+										'1')
+					!!}
+					@else
+					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
+										$guestentry->attendancestatus,
+										'0')
+					!!}
+					@endif
+				@else
+					@if ($guestentry->attendancestatus !== null)
+					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
+										$guestentry->attendancestatus,
+										'1')
+					!!}
+					@else
+					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
+										$guestentry->attendancestatus,
+										'0')
+					!!}
+					@endif
+				@endif
 				
-				{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
-									$guestentry->attendancestatus,
-									'0', false)
-				!!} 
-			
 			{{--Only allow logged in Members to change Guestentries, allow everyone to add new--}}
 
 				@if (Session::has("userName") && $guestentry->name !== null)
@@ -72,6 +93,10 @@
 				@endif
 
 			{!! Form::close() !!}
+
+		{{--Show a line after each row--}}
+
+			<hr class="col-md-12 col-md-12 col-xs-12 top-padding no-margin no-padding">
 
 			@endforeach
 
