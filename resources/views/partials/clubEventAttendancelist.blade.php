@@ -1,6 +1,39 @@
 	<script>
-var checkbox = document.getElementById(	'attendancestatus' . $guestentry);
-checkbox.indeterminate = true;
+<script>
+	var $check = $("input[type=checkbox]"), el;
+$check
+   .data('checked',0)
+   .click(function(e) {
+       
+        el = $(this);
+                
+        switch(el.data('checked')) {
+            
+            // unchecked, going indeterminate
+            case 0:
+                el.data('checked',1);
+                el.prop('indeterminate',true);
+                break;
+            
+            // indeterminate, going checked
+            case 1:
+                el.data('checked',2);
+                el.prop('indeterminate',false);
+                el.prop('checked',true);                
+                break;
+            
+            // checked, going unchecked
+            default:  
+                el.data('checked',0);
+                el.prop('indeterminate',false);
+                el.prop('checked',false);
+                
+        }
+        
+    });
+</script>
+
+
 </script>
 
 
