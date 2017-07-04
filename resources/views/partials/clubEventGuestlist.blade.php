@@ -76,28 +76,28 @@
 		{{--Add one empty Field at the End--}}
 			
 			{!! Form::open( array('method' => 'POST',
-		   						  'route' => ['guestentry.store', $guestentry->id],
-								  'id' => $guestentry->id,
+		   						  'route' => ['guestentry.store', $guestentry],
+								  'id' => $guestentry,
 								  'class' => 'GuestAttendanceEntry'))
 			!!}
 			
 			{{-- Firstname and Surname --}}
 
 				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
-					{!! Form::text(	'name' . $guestentry->id,
-									Input::flash('name' . $guestentry->id),
+					{!! Form::text(	'name' . $guestentry,
+									Input::flash('name' . $guestentry),
 									array(	'placeholder'=>Lang::get('mainLang.firstname'),
-											'id'=>'name' . $guestentry->id,
+											'id'=>'name' . $guestentry,
 											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 				</div>
 				&nbsp;&nbsp;
 
 				<div class="col-md-2 col-sm-2 col-xs-3 no-padding">
-					{!! Form::text(	'surname' . $guestentry->id,
-									Input::flash('surname' . $guestentry->id),
+					{!! Form::text(	'surname' . $guestentry,
+									Input::flash('surname' . $guestentry),
 									array(	'placeholder'=>Lang::get('mainLang.surname'),
-											'id'=>'surname' . $guestentry->id,
+											'id'=>'surname' . $guestentry,
 											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 				</div>
@@ -108,10 +108,10 @@
 
 				<div class="col-md-6 col-sm-12 col-xs-12 no-margin">
 					
-					{!! Form::text(	'comment' . $guestentry->id,
-									Input::flash('comment' . $guestentry->id),
+					{!! Form::text(	'comment' . $guestentry,
+									Input::flash('comment' . $guestentry),
 									array(	'placeholder'=>Lang::get('mainLang.addComment'),
-											'id'=>'comment' . $guestentry->id,
+											'id'=>'comment' . $guestentry,
 											'class'=>'col-md-11 col-sm-11 col-xs-10 no-padding no-margin'))
 					!!}
 			
@@ -121,7 +121,7 @@
 			
 			{{--Allow Everyone to create Guestentries--}}
 
-				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry->id, 'hidden')) !!}
+				{!! Form::submit('save', array('id'=>'btn-submit-changes' . $guestentry, 'hidden')) !!}
 
 			{!! Form::close() !!}
 
