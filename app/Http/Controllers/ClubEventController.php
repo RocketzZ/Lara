@@ -158,9 +158,9 @@ class ClubEventController extends Controller
         $newEvent = $this->editClubEvent(null);
         $newEvent->save();
 
-        $guestlistattendancelist = (new GuestListAttendanceListController)->update(null);
-        $guestlistattendancelist->evnt_id = $newEvent->id;        
-        $guestlistattendancelist->save();
+        $newGuestlistattendancelist = (new GuestListAttendanceListController)->update(null);
+        $newGuestlistattendancelist->evnt_id = $newEvent->id;        
+        $newGuestlistattendancelist->save();
 
         $newSchedule = (new ScheduleController)->update(null);
         $newSchedule->evnt_id = $newEvent->id;
@@ -244,9 +244,8 @@ class ClubEventController extends Controller
         $guestlistattendancelist = GuestListAttendanceList::findOrFail($clubEvent->getGuestListAttendanceList->id);
         
         $guestentry = GuestAttendanceEntry::where('list_id', '=', $guestlistattendancelist->evnt_id)
-                                                ->with( 'getGuestEntry',
-                                                        'getGuestListAttendanceList',
-                                                        'getEventID'
+                                                ->with( 'getGuestListAttendanceList'
+                                                        
                                                         )
                                                 ->get();
 

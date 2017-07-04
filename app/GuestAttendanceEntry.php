@@ -35,16 +35,13 @@ class GuestAttendanceEntry extends Model
      );
 
 //name functions correctly and get data
-public function getGuestEntry() {
-        return $this->hasMany('Lara\GuestAttendanceEntry', 'evnt_id', 'list_id');
-    }
 
 public function getUserID() {
 		return $this->belongsTo('Lara\Person', 'personid', 'id');
 	}
 
 public function getGuestListAttendanceList() {
-		return $this->belongsTo('Lara\GuestListAttendanceList', 'list_id', 'id');
+		return $this->belongsTo('Lara\GuestListAttendanceList', 'list_id', 'evnt_id');
 	}
 
 }
