@@ -108,7 +108,7 @@ class ClubEventController extends Controller
             $info       = $template->getClubEvent->evnt_public_info;
             $details    = $template->getClubEvent->evnt_private_details;
             $private    = $template->getClubEvent->evnt_is_private;
-            $guestlistattendancelist = $template->getGuestListAttendanceList->with('getEventID')->get();
+            $guestlistattendancelist = $template->getClubEvent->guestlistattendancelist;
             $guestentry = $template->getGuestEntry->get();
         } else {
             // fill variables with no data if no template was chosen
@@ -467,6 +467,7 @@ class ClubEventController extends Controller
         $event->evnt_public_info     = Input::get('publicInfo');
         $event->evnt_private_details = Input::get('privateDetails');
         $event->evnt_type            = Input::get('evnt_type');
+        $event->guestlistattendancelist = Input::get('guestlistattendancelist');
 
         // create new place
         if (!Place::where('plc_title', '=', Input::get('place'))->first())
