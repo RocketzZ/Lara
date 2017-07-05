@@ -375,7 +375,7 @@ class ClubEventController extends Controller
 
         $entries = (new ScheduleController)->editScheduleEntries($schedule->id);
 
-        $list = (new GuestListAttendanceListController)->editList($list->id);
+        //$list = (new GuestListAttendanceListController)->editList($list->id);
 
         // log the action
         Log::info('Event edited: ' . Session::get('userName') . ' (' . Session::get('userId') . ', '

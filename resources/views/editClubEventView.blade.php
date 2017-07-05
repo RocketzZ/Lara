@@ -225,7 +225,15 @@ AND (Session::get('userGroup') == 'marketing'
 						</div>	   	
 				    </div>
 			   	</div>
-
+				
+				{{-- checkbox for creating guest/attendancelist --}}
+				<div class="form-group col-md-12 col-sm-12 col-xs-12 no-padding">
+					<div class="col-md-10 col-sm-10 col-xs-12">
+					<label for="guestlistattendancelist">{{ trans('mainLang.createGuestAttendanceList') }}: &nbsp;</label>
+					{!! Form::checkbox('guestlistattendancelist', '1', false) !!}
+					</div>
+				</div>
+				
 			    <div class="form-group col-md-12 col-sm-12 col-xs-12 no-padding">	
 					<label for="preparationTime" class="control-label col-md-2 col-sm-2 col-xs-4">{{ trans('mainLang.DV-Time') }}:</label>
 					<div class="col-md-3 col-sm-3 col-xs-3">
