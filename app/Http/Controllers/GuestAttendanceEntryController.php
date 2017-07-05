@@ -182,6 +182,14 @@ class GuestAttendanceEntryController extends Controller
         
         $guestentry = GuestAttendanceEntry::where('id', '=', $id)->findOrFail($id);
 
+        //Check if the filled Guestentry was the last empty one and add one new empty
+
+        if ($guestentry->name == null && $guestentry->list_id == $guestentry->list_id){
+        $newGuestentry = GuestAttendanceEntryController::store(null);
+        $newGuestentry->list_id = $guestentry->list_id;
+        $newGuestentry->save();
+        }
+
         //Get the Data
 
         if ($id != 0){
@@ -202,9 +210,6 @@ class GuestAttendanceEntryController extends Controller
         $guestentry->save();
         }
         
-        $newGuestentry = GuestAttendanceEntryController::store(null);
-        $newGuestentry->list_id = $guestentry->list_id;
-        $newGuestentry->save();
         
         return redirect()->back();
          

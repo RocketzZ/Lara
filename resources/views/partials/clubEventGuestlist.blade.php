@@ -58,19 +58,7 @@
 
 				<label for="attendancestatus">{{ trans('mainLang.Attendancestatus') }}</label>
 
-				@if (Session::has("userName"))
-					@if ($guestentry->attendancestatus !== null)
-					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
-										$guestentry->attendancestatus,
-										'1')
-					!!}
-					@else
-					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
-										$guestentry->attendancestatus,
-										'0')
-					!!}
-					@endif
-				@else
+				@if ($guestentry->name !== null)
 					@if ($guestentry->attendancestatus !== null)
 					{!! Form::checkbox(	'attendancestatus' . $guestentry->id,
 										$guestentry->attendancestatus,
