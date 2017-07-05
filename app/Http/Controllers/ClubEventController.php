@@ -374,7 +374,16 @@ class ClubEventController extends Controller
         $schedule = (new ScheduleController)->update($event->getSchedule->id);
 
         $entries = (new ScheduleController)->editScheduleEntries($schedule->id);
+        
+        $newGuestlistattendancelist = (new GuestListAttendanceListController)->update(null);
+        $newGuestlistattendancelist->evnt_id = $event->id;        
+        $newGuestlistattendancelist->save();
 
+        if ($event->guestlistattendancelist != 0){
+            $newGuestentry = (new GuestAttendanceEntryController)->store(null);
+            $newGuestentry->list_id = $event->id;
+            $newGuestentry->save();
+        }
         //$list = (new GuestListAttendanceListController)->editList($list->id);
 
         // log the action
